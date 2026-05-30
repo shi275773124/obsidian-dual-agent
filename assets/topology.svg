@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0e1a"/>
+      <stop offset="1" stop-color="#0d1424"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a2238" stroke-width="0.5"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00e5ff"/>
+    </marker>
+    <marker id="arrow-mag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff4dd2"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="520" fill="url(#bg)"/>
+  <rect width="920" height="520" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="460" y="40" fill="#9aa8c7" font-size="14" text-anchor="middle" letter-spacing="2">OBSIDIAN  DUAL-AGENT  VAULT</text>
+
+  <!-- GitHub center -->
+  <g filter="url(#glow)">
+    <rect x="340" y="200" width="240" height="100" rx="8" fill="#0f172a" stroke="#00e5ff" stroke-width="1.5"/>
+  </g>
+  <text x="460" y="232" fill="#00e5ff" font-size="16" font-weight="700" text-anchor="middle">GitHub · Private Repo</text>
+  <text x="460" y="258" fill="#7fbcd0" font-size="12" text-anchor="middle">single source of truth</text>
+  <text x="460" y="280" fill="#5b7090" font-size="11" text-anchor="middle">git history · provenance · backups</text>
+
+  <!-- Agent A -->
+  <g filter="url(#glow)">
+    <rect x="60" y="100" width="200" height="80" rx="6" fill="#0f172a" stroke="#ff4dd2" stroke-width="1.5"/>
+  </g>
+  <text x="160" y="128" fill="#ff4dd2" font-size="14" font-weight="700" text-anchor="middle">Agent A</text>
+  <text x="160" y="148" fill="#9aa8c7" font-size="11" text-anchor="middle">VPS-1 · own git author</text>
+  <text x="160" y="166" fill="#5b7090" font-size="10" text-anchor="middle">writes [AGENT-A] tagged blocks</text>
+
+  <!-- Agent B -->
+  <g filter="url(#glow)">
+    <rect x="660" y="100" width="200" height="80" rx="6" fill="#0f172a" stroke="#ff4dd2" stroke-width="1.5"/>
+  </g>
+  <text x="760" y="128" fill="#ff4dd2" font-size="14" font-weight="700" text-anchor="middle">Agent B</text>
+  <text x="760" y="148" fill="#9aa8c7" font-size="11" text-anchor="middle">VPS-2 · own git author</text>
+  <text x="760" y="166" fill="#5b7090" font-size="10" text-anchor="middle">audits + fixes via [AGENT-B audit]</text>
+
+  <!-- Laptop -->
+  <g filter="url(#glow)">
+    <rect x="340" y="400" width="240" height="80" rx="6" fill="#0f172a" stroke="#00e5ff" stroke-width="1.5"/>
+  </g>
+  <text x="460" y="428" fill="#00e5ff" font-size="14" font-weight="700" text-anchor="middle">Your Laptop · Obsidian</text>
+  <text x="460" y="448" fill="#9aa8c7" font-size="11" text-anchor="middle">Obsidian Git plugin</text>
+  <text x="460" y="466" fill="#5b7090" font-size="10" text-anchor="middle">auto pull 5min · auto push 10min</text>
+
+  <!-- Lines: A <-> GitHub -->
+  <line x1="240" y1="180" x2="360" y2="220" stroke="#ff4dd2" stroke-width="1.5" marker-end="url(#arrow-mag)" opacity="0.85"/>
+  <line x1="360" y1="240" x2="240" y2="180" stroke="#ff4dd2" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="270" y="195" fill="#ff4dd2" font-size="10">git push</text>
+  <text x="270" y="215" fill="#ff4dd2" font-size="10" opacity="0.7">git pull</text>
+
+  <!-- Lines: B <-> GitHub -->
+  <line x1="680" y1="180" x2="560" y2="220" stroke="#ff4dd2" stroke-width="1.5" marker-end="url(#arrow-mag)" opacity="0.85"/>
+  <line x1="560" y1="240" x2="680" y2="180" stroke="#ff4dd2" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="600" y="195" fill="#ff4dd2" font-size="10">git push</text>
+  <text x="600" y="215" fill="#ff4dd2" font-size="10" opacity="0.7">git pull</text>
+
+  <!-- Lines: GitHub <-> Laptop -->
+  <line x1="460" y1="300" x2="460" y2="395" stroke="#00e5ff" stroke-width="1.5" marker-end="url(#arrow-cyan)" opacity="0.85"/>
+  <line x1="475" y1="395" x2="475" y2="300" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5" marker-end="url(#arrow-cyan)"/>
+  <text x="490" y="335" fill="#00e5ff" font-size="10">auto pull</text>
+  <text x="490" y="355" fill="#00e5ff" font-size="10" opacity="0.7">auto push</text>
+
+  <!-- Footer -->
+  <text x="460" y="505" fill="#3d4d6e" font-size="10" text-anchor="middle">conflicts → first-hand sources, not vibes</text>
+</svg>

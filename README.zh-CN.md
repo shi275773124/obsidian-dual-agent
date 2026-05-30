@@ -29,27 +29,7 @@
 
 ## 架构（90 秒看完）
 
-```
-┌─────────────────┐         ┌─────────────────┐
-│   Agent A       │         │   Agent B       │
-│  （比如 VPS-1）  │         │  （比如 VPS-2）  │
-└────────┬────────┘         └────────┬────────┘
-         │                           │
-         │  git push / pull          │  git push / pull
-         ▼                           ▼
-        ┌──────────────────────────────┐
-        │   GitHub（私有 repo）        │
-        │   = 唯一真相源                │
-        └──────────────────────────────┘
-                      ▲
-                      │  Obsidian Git 插件
-                      │  （5 分钟自动 pull，10 分钟自动 push）
-                      │
-        ┌──────────────────────────────┐
-        │   你的笔记本                  │
-        │   Obsidian app 读 vault       │
-        └──────────────────────────────┘
-```
+![拓扑：两个 agent 共享一个私有 GitHub repo 上的 Obsidian vault，你的笔记本通过 Obsidian Git 插件自动同步](./assets/topology.svg)
 
 每个 agent 用 **自己的 author 身份** commit。每段文字标 `[AGENT-A]` / `[AGENT-B]` / `[BOTH]`。冲突走一手 docs（官方 API、RFC、源码）裁决，不靠嘴硬。
 

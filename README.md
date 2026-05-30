@@ -29,27 +29,7 @@ Real example that motivated this repo: two agents researched perp DEX fee schedu
 
 ## Architecture (90 seconds)
 
-```
-┌─────────────────┐         ┌─────────────────┐
-│   Agent A       │         │   Agent B       │
-│   (e.g. VPS-1)  │         │   (e.g. VPS-2)  │
-└────────┬────────┘         └────────┬────────┘
-         │                           │
-         │  git push / pull          │  git push / pull
-         ▼                           ▼
-        ┌──────────────────────────────┐
-        │   GitHub (private repo)       │
-        │   = single source of truth    │
-        └──────────────────────────────┘
-                      ▲
-                      │  Obsidian Git plugin
-                      │  (5-min auto pull, 10-min auto push)
-                      │
-        ┌──────────────────────────────┐
-        │   Your laptop                 │
-        │   Obsidian app reads vault    │
-        └──────────────────────────────┘
-```
+![Topology — two agents share one Obsidian vault via a private GitHub repo, your laptop syncs through the Obsidian Git plugin](./assets/topology.svg)
 
 Each agent commits with **its own author identity**. Each block of prose is tagged `[AGENT-A]` / `[AGENT-B]` / `[BOTH]`. Conflicts get adjudicated by reading first-hand docs (official API, RFC, source code) — not by argument.
 
