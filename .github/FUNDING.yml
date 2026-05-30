@@ -1,0 +1,5 @@
+# GitHub will render a "❤️ Sponsor" button at the top of the repo using these.
+# Multiple platforms can be listed; first ones get prime placement.
+
+custom:
+  - 'https://buymeacoffee.com/chris168'

@@ -94,3 +94,15 @@ The agents disagreed on 4 fee tiers. Going to first-hand docs settled all 4 — 
 ## License
 
 MIT — fork it, ship it, write a blog post about it.
+
+---
+
+## Support the project
+
+If this template saved you a couple hours, here's how you can give back:
+
+- 🐦 Follow [@aishikejian](https://x.com/aishikejian) on X — more dual-agent / AI ops experiments coming
+- ☕ [Buy me a coffee](https://buymeacoffee.com/chris168) — fuel for the next late-night session
+- ⭐ Star this repo so other people find it
+- 🇨🇳 微信赞赏码 / 支付宝收款码 see [README.zh-CN.md](./README.zh-CN.md#支持作者)
+

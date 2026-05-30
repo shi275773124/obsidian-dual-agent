@@ -94,3 +94,16 @@ git clone git@github.com:you/your-vault.git "$HOME/Documents/Obsidian Vault"
 ## License
 
 MIT 协议——随便 fork、随便 ship、欢迎写文章传播。
+
+---
+
+## 支持作者
+
+如果这个模板帮你省下了几小时，欢迎用任意一种方式支持：
+
+- 🐦 推特关注 [@aishikejian](https://x.com/aishikejian) — 后续还有更多双 agent / AI 运维实验
+- ☕ [Buy me a coffee](https://buymeacoffee.com/chris168) — 给作者续杯咖啡
+- ⭐ 给 repo 点 Star，让更多人看到这个 pattern
+
+> 微信赞赏码 / 支付宝收款码：稍后补上（贴二维码图后会替换这一行）
+
