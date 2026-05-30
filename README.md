@@ -108,5 +108,4 @@ If this template saved you a couple hours, here's how you can give back:
   ```
   0x1C06DeC922015ee7817aC21d37Da2da2F07d7119
   ```
-- 🇨🇳 微信赞赏码 / 支付宝收款码 see [README.zh-CN.md](./README.zh-CN.md#支持作者)
 
