@@ -1,0 +1,37 @@
+# Obsidian workspace state — local UI state, not content
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspaces.json
+.obsidian/cache
+.obsidian/.cache
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor state
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Trash (some Obsidian configs)
+.trash/
+
+# Secrets — paranoid defaults
+*.env
+*.env.*
+secrets/
+credentials.json
+.credentials
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Build / temp
+node_modules/
+*.log
+*.tmp
