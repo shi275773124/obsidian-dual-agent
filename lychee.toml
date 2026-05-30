@@ -1,0 +1,25 @@
+# lychee link checker config
+# https://github.com/lycheeverse/lychee
+
+# Exclude placeholder URLs used in docs (users replace these with their own)
+exclude = [
+  "YOUR-USER",
+  "yourdomain",
+  "example\\.com",
+]
+
+# Accept these HTTP status codes as "alive"
+# 403/429 = rate-limited, not actually broken
+accept = [200, 206, 301, 302, 403, 429]
+
+# Don't check mailto: links
+exclude_mail = true
+
+# Be polite — limit concurrency
+max_concurrency = 5
+
+# Reasonable timeout
+timeout = 20
+
+# Retry on transient failures
+max_retries = 2

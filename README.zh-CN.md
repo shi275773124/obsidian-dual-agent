@@ -2,6 +2,10 @@
 
 > 两个 AI agent，一个 Obsidian vault，git 同步，冲突走一手 docs 仲裁。
 
+[![Link Check](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![English](https://img.shields.io/badge/lang-English-blue.svg)](./README.md)
+
 [English](./README.md) · [架构](./docs/01-architecture.zh-CN.md) · [部署](./docs/02-setup.zh-CN.md) · [协作规范](./docs/03-collaboration.zh-CN.md) · [故障排查](./docs/04-troubleshooting.zh-CN.md)
 
 ---

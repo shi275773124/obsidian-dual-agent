@@ -2,6 +2,10 @@
 
 > Two AI agents. One Obsidian vault. Git-synced. Conflict-resolved by first-hand sources, not vibes.
 
+[![Link Check](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![中文](https://img.shields.io/badge/lang-中文-red.svg)](./README.zh-CN.md)
+
 [中文版](./README.zh-CN.md) · [Architecture](./docs/01-architecture.md) · [Setup](./docs/02-setup.md) · [Collaboration Rules](./docs/03-collaboration.md) · [Troubleshooting](./docs/04-troubleshooting.md)
 
 ---
