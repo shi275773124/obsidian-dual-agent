@@ -104,6 +104,10 @@ MIT 协议——随便 fork、随便 ship、欢迎写文章传播。
 - 🐦 推特关注 [@aishikejian](https://x.com/aishikejian) — 后续还有更多双 agent / AI 运维实验
 - ☕ [Buy me a coffee](https://buymeacoffee.com/chris168) — 给作者续杯咖啡
 - ⭐ 给 repo 点 Star，让更多人看到这个 pattern
+- 🪙 加密货币打赏（ETH / USDT-ERC20 / 任意 EVM 链）：
+  ```
+  0x1C06DeC922015ee7817aC21d37Da2da2F07d7119
+  ```
 
 > 微信赞赏码 / 支付宝收款码：稍后补上（贴二维码图后会替换这一行）
 

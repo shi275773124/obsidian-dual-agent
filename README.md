@@ -104,5 +104,9 @@ If this template saved you a couple hours, here's how you can give back:
 - 🐦 Follow [@aishikejian](https://x.com/aishikejian) on X — more dual-agent / AI ops experiments coming
 - ☕ [Buy me a coffee](https://buymeacoffee.com/chris168) — fuel for the next late-night session
 - ⭐ Star this repo so other people find it
+- 🪙 Crypto tips (ETH / USDT-ERC20 / any EVM chain):
+  ```
+  0x1C06DeC922015ee7817aC21d37Da2da2F07d7119
+  ```
 - 🇨🇳 微信赞赏码 / 支付宝收款码 see [README.zh-CN.md](./README.zh-CN.md#支持作者)
 
