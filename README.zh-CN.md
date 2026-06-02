@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![English](https://img.shields.io/badge/lang-English-blue.svg)](./README.md)
 
-[English](./README.md) · [架构](./docs/01-architecture.zh-CN.md) · [部署](./docs/02-setup.zh-CN.md) · [协作规范](./docs/03-collaboration.zh-CN.md) · [故障排查](./docs/04-troubleshooting.zh-CN.md)
+[English](./README.md) · [架构](./docs/01-architecture.zh-CN.md) · [部署](./docs/02-setup.zh-CN.md) · [协作规范](./docs/03-collaboration.zh-CN.md) · [对抗审议](./docs/05-adversarial-review.zh-CN.md) · [故障排查](./docs/04-troubleshooting.zh-CN.md)
 
 <p align="center">
   <img src="./assets/flow-card.png" alt="Agent Review Kit：Agent A 起稿 → Agent B 审计 → 分歧 → 一手资料仲裁 → Git 留证据链 → Ship" width="840">
@@ -231,6 +231,8 @@ A 说费率 4.5bps，B 说 9.0bps——谁嗓门大都没用。打开官方 docs
 | [`prompts/human.md`](./templates/prompts/human.md) | Human Operator（仲裁）prompt |
 | [`kickoff.md`](./templates/kickoff.md) | 任务启动模板：范围、来源标准、分工、验收 checklist |
 | [`retro.md`](./templates/retro.md) | 复盘模板：双方各列错误 + 元复盘（防独立性漂移） |
+| [`precondition-checklist.md`](./templates/precondition-checklist.md) | G1–G4 四道断言前置闸门（防"事实对、结论错"） |
+| [`step-verify.sh`](./templates/step-verify.sh) | 多步 pipeline 守卫脚本（存在/够大/非 ABORT） |
 | [`conflict-log.md`](./templates/conflict-log.md) | 冲突记录模板 |
 | [`resolution-log.md`](./templates/resolution-log.md) | 仲裁结论模板 |
 | [`.gitignore`](./templates/.gitignore) | Obsidian 推荐忽略项 |
@@ -262,6 +264,21 @@ A 说费率 4.5bps，B 说 9.0bps——谁嗓门大都没用。打开官方 docs
 6. Human Operator 或任一 Agent 回到一手资料，写 `[RESOLUTION]`
 7. 双方确认后，合并内容标为 `[BOTH]`
 8. 仲裁结论写入 `05-resolutions.md`，提交 commit
+
+---
+
+## 进阶：当事实对、结论却错（对抗审议 v2）
+
+普通互审拦的是"把错数字写漂亮"。但还有更难的一类错：**事实全对，结论却错**——用错的工具量了对的数据，把局部事实当完整结论，或者写个 ABORT 文件就当"完成"。
+
+进阶变体在三条规则之上再加四样：
+
+- **Verdict ladder**：`PROCEED` / `HOLD-N` / `ARCHIVE`，多轮对抗，修复版要扛过重新审
+- **G1–G4 前置闸门**：实体消歧 / 量纲对齐 / 先验冲突刹车 / 尺子-对象匹配
+- **跨模型 reviewer**：两个不同模型族就够独立，不用两台机器
+- **verdict-as-file + 步骤守卫**：多步 pipeline 每步验"存在 / 够大 / 不是 ABORT 开头"
+
+详见 [docs/05 · 对抗审议](./docs/05-adversarial-review.zh-CN.md)。为什么"事实对也会结论错"，看 [examples/wrong-tool-right-data.md](./examples/wrong-tool-right-data.md)；跨模型怎么跑见 [examples/cross-model-rpc.md](./examples/cross-model-rpc.md)。
 
 ---
 
@@ -340,13 +357,17 @@ docs(human):      finalize report after review
 │   ├── 03-collaboration.md      协作规范（英文）
 │   ├── 03-collaboration.zh-CN.md 协作规范（中文）
 │   ├── 04-troubleshooting.md    故障排查（英文）
-│   └── 04-troubleshooting.zh-CN.md 故障排查（中文）
+│   ├── 04-troubleshooting.zh-CN.md 故障排查（中文）
+│   ├── 05-adversarial-review.md  对抗审议进阶（英文）
+│   └── 05-adversarial-review.zh-CN.md 对抗审议进阶（中文）
 ├── templates/
 │   ├── AGENTS.md                丢进 vault 根目录的规则文件
 │   ├── .gitignore               Obsidian 推荐忽略项
 │   ├── obsidian-git-settings.md 插件配置片段
 │   ├── kickoff.md               任务启动模板
 │   ├── retro.md                 复盘 + 元复盘模板
+│   ├── precondition-checklist.md G1–G4 断言闸门
+│   ├── step-verify.sh           多步 pipeline 守卫脚本
 │   ├── conflict-log.md          冲突记录模板
 │   ├── resolution-log.md        仲裁结论模板
 │   └── prompts/
@@ -354,7 +375,9 @@ docs(human):      finalize report after review
 │       ├── agent-b.md           Agent B 完整 prompt
 │       └── human.md             Human Operator prompt
 ├── examples/
-│   └── comparison-case-study/   脱敏端到端样例（draft→audit→冲突→仲裁→上线）
+│   ├── comparison-case-study/   脱敏端到端样例（draft→audit→冲突→仲裁→上线）
+│   ├── cross-model-rpc.md       跨模型审议（任意 OAI 兼容端点）
+│   └── wrong-tool-right-data.md 脱敏案例：事实对、结论错（G4 由来）
 ├── demo-vault/                  可直接 fork 的空壳工作区（改 00-brief 就能跑）
 ├── assets/
 │   └── flow-card.png            可截图传播的流程图

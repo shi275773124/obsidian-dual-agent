@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![中文](https://img.shields.io/badge/lang-中文-red.svg)](./README.zh-CN.md)
 
-[中文版](./README.zh-CN.md) · [Architecture](./docs/01-architecture.md) · [Setup](./docs/02-setup.md) · [Collaboration Rules](./docs/03-collaboration.md) · [Troubleshooting](./docs/04-troubleshooting.md)
+[中文版](./README.zh-CN.md) · [Architecture](./docs/01-architecture.md) · [Setup](./docs/02-setup.md) · [Collaboration Rules](./docs/03-collaboration.md) · [Adversarial Review](./docs/05-adversarial-review.md) · [Troubleshooting](./docs/04-troubleshooting.md)
 
 <p align="center">
   <img src="./assets/flow-card.png" alt="Agent Review Kit: Agent A drafts → Agent B audits → conflict → first-hand sources arbitrate → Git evidence trail → ship" width="840">
@@ -150,6 +150,8 @@ Everything under `templates/` is ready to drop into your vault:
 | [`prompts/human.md`](./templates/prompts/human.md) | Human Operator (arbiter) prompt |
 | [`kickoff.md`](./templates/kickoff.md) | Task kickoff: scope, source bar, division of labor, acceptance checklist |
 | [`retro.md`](./templates/retro.md) | Retrospective: each agent lists mistakes + meta-retro (independence drift) |
+| [`precondition-checklist.md`](./templates/precondition-checklist.md) | G1–G4 gates before any claim (catches "right facts, wrong conclusion") |
+| [`step-verify.sh`](./templates/step-verify.sh) | Multi-step pipeline guard (exists / size / not-ABORT) |
 | [`conflict-log.md`](./templates/conflict-log.md) | Conflict tracking template |
 | [`resolution-log.md`](./templates/resolution-log.md) | Resolution tracking template |
 | [`.gitignore`](./templates/.gitignore) | Sensible Obsidian defaults |
@@ -183,6 +185,26 @@ docs(human):      finalize report after review
 
 ---
 
+## Beyond simple peer review — when right facts produce wrong conclusions
+
+Simple peer review catches a wrong number written prettily. The harder failure is
+**right facts, wrong conclusion** — the wrong tool on the right data, a partial
+truth shipped as a verdict, or a step that "fails closed" by writing ABORT and
+calling it done.
+
+The deep variant adds four things on top of the three rules:
+
+- **Verdict ladder**: `PROCEED` / `HOLD-N` / `ARCHIVE`, multi-round, fixes must survive a fresh attack
+- **G1–G4 precondition gates**: entity disambiguation / unit alignment / prior-conflict brake / ruler-object match
+- **Cross-model reviewer**: two different model families = enough independence, no second machine needed
+- **Verdict-as-file + step guards**: each pipeline step verified for exists / size / not-ABORT
+
+See [docs/05 — Adversarial Review](./docs/05-adversarial-review.md). For why right
+facts still go wrong, read [examples/wrong-tool-right-data.md](./examples/wrong-tool-right-data.md);
+for the cross-model setup, [examples/cross-model-rpc.md](./examples/cross-model-rpc.md).
+
+---
+
 ## What's in this repo
 
 ```
@@ -193,13 +215,16 @@ docs(human):      finalize report after review
 │   ├── 01-architecture.md       why and how it works
 │   ├── 02-setup.md              VPS + laptop step-by-step
 │   ├── 03-collaboration.md      tagging, conflict resolution
-│   └── 04-troubleshooting.md    git conflicts, plugin issues
+│   ├── 04-troubleshooting.md    git conflicts, plugin issues
+│   └── 05-adversarial-review.md verdict ladder + G1–G4 + step guards
 ├── templates/
 │   ├── AGENTS.md                drop into your vault root
 │   ├── .gitignore               sensible Obsidian defaults
 │   ├── obsidian-git-settings.md plugin config snippet
 │   ├── kickoff.md               task kickoff template
 │   ├── retro.md                 retrospective + meta-retro template
+│   ├── precondition-checklist.md G1–G4 claim gates
+│   ├── step-verify.sh           multi-step pipeline guard
 │   ├── conflict-log.md          conflict tracking template
 │   ├── resolution-log.md        resolution tracking template
 │   └── prompts/
@@ -207,7 +232,9 @@ docs(human):      finalize report after review
 │       ├── agent-b.md           Agent B full prompt
 │       └── human.md             Human Operator prompt
 ├── examples/
-│   └── comparison-case-study/   Sanitized end-to-end sample (draft→audit→resolve→ship)
+│   ├── comparison-case-study/   Sanitized end-to-end sample (draft→audit→resolve→ship)
+│   ├── cross-model-rpc.md       Cross-model review via any OAI-compatible endpoint
+│   └── wrong-tool-right-data.md Sanitized case: right facts, wrong conclusion (origin of G4)
 ├── demo-vault/                  Forkable empty workspace (edit 00-brief and go)
 ├── assets/
 │   └── flow-card.png            Shareable flow diagram
