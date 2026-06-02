@@ -96,8 +96,8 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 
 - [x] CLI 引擎 `falsify`(lint / review / verdict 闸门)
 - [x] 可 fork 的 demo vault · 脱敏案例 · 流程图 · 真实运行 GIF
-- [ ] GitHub Action:PR 没过 verdict 就 block
-- [ ] 一键化:更少配置、合理默认、粘贴即跑
+- [x] 一键化:provider 预设(`-p deepseek`)/ `.falsify` 配置 / 粘贴即跑
+- [x] GitHub Action:PR 没过 verdict 就 block(模板 [`templates/github-action-falsify.yml`](./templates/github-action-falsify.yml))
 - [ ] 更多场景模板:投研 / 竞品 / 技术选型 / 代码审计
 
 ## Contributing

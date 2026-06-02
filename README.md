@@ -94,8 +94,8 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 
 - [x] CLI engine `falsify` (lint / review / verdict gate)
 - [x] Forkable demo vault · sanitized case · flow card · real-run GIF
-- [ ] GitHub Action: block a PR that doesn't pass the verdict
-- [ ] One-click: fewer settings, sane defaults, paste-and-go
+- [x] One-click: provider presets (`-p deepseek`) / `.falsify` config / paste-and-go
+- [x] GitHub Action: block a PR that doesn't pass the verdict ([`templates/github-action-falsify.yml`](./templates/github-action-falsify.yml))
 - [ ] More scenario templates: research / competitor / tech selection / code audit
 
 ## Contributing

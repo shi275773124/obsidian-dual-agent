@@ -1,0 +1,75 @@
+# Falsify — drop-in PR gate. Copy this to .github/workflows/falsify.yml in YOUR repo.
+#
+# It blocks a pull request when changed tagged content isn't shippable:
+#   • lint gate    — tags + unresolved markers ([CONFLICT]/[NEEDS-*]). No secrets, always runs.
+#   • verdict gate — the Skeptic reviews each changed file and must return PROCEED.
+#                    Runs only if you set the secrets below (otherwise skipped).
+#
+# Setup (2 minutes):
+#   1. Copy this file to .github/workflows/falsify.yml
+#   2. Point CONTENT_GLOBS (below) at the dirs holding your TAGGED content
+#      (research/reports — NOT docs/ or README, which are plain prose).
+#   3. For the verdict gate, add repo secrets (Settings → Secrets → Actions):
+#        FALSIFY_API_BASE   e.g. https://api.deepseek.com/v1
+#        FALSIFY_API_KEY    your key
+#        FALSIFY_MODEL      e.g. deepseek-chat
+#   4. Make it required: Settings → Branches → branch protection → require the
+#      "falsify" status check before merging. Now a HOLD verdict blocks the PR.
+
+name: falsify
+on:
+  pull_request:
+    paths:
+      - "research/**/*.md"
+      - "reports/**/*.md"
+  workflow_dispatch:
+
+jobs:
+  falsify:
+    runs-on: ubuntu-latest
+    env:
+      CONTENT_GLOBS: "research reports"          # dirs with tagged content
+      FALSIFY_API_BASE: ${{ secrets.FALSIFY_API_BASE }}
+      FALSIFY_API_KEY: ${{ secrets.FALSIFY_API_KEY }}
+      FALSIFY_MODEL: ${{ secrets.FALSIFY_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install falsify
+        run: pip install "git+https://github.com/shi275773124/obsidian-dual-agent.git"
+
+      - name: Collect changed content
+        id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          files=$(git diff --name-only "$base"...HEAD -- $CONTENT_GLOBS | grep -E '\.md$' || true)
+          { echo "files<<EOF"; echo "$files"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+          echo "changed content:"; echo "${files:-<none>}"
+
+      - name: Lint gate (tags + ship-blockers, no API)
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            echo "::group::falsify lint $f"
+            falsify lint "$f" || fail=1
+            echo "::endgroup::"
+          done <<< "${{ steps.changed.outputs.files }}"
+          exit $fail
+
+      - name: Verdict gate (the Skeptic) — only if FALSIFY_API_KEY is set
+        if: ${{ env.FALSIFY_API_KEY != '' }}
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            echo "::group::falsify review $f"
+            falsify review "$f" || fail=1
+            echo "::endgroup::"
+          done <<< "${{ steps.changed.outputs.files }}"
+          exit $fail
