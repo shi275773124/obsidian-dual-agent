@@ -1,6 +1,7 @@
-# Agent Review Kit
+# Falsify · 证伪
 
 > 别让 AI Agent 写完就 Ship：一个写，一个审，Git 留证据链。
+> 一个 **Agent Review Kit**——给 AI Agent 加一层审稿。
 
 [![Link Check](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -9,7 +10,7 @@
 [English](./README.md) · [架构](./docs/01-architecture.zh-CN.md) · [部署](./docs/02-setup.zh-CN.md) · [协作规范](./docs/03-collaboration.zh-CN.md) · [对抗审议](./docs/05-adversarial-review.zh-CN.md) · [故障排查](./docs/04-troubleshooting.zh-CN.md)
 
 <p align="center">
-  <img src="./assets/flow-card.png" alt="Agent Review Kit：Agent A 起稿 → Agent B 审计 → 分歧 → 一手资料仲裁 → Git 留证据链 → Ship" width="840">
+  <img src="./assets/flow-card.png" alt="Falsify 证伪：Agent A 起稿 → Agent B 审计 → 分歧 → 一手资料仲裁 → Git 留证据链 → Ship" width="840">
 </p>
 
 > 🙏 致谢 **Hermes Agent**、**Claude Code**、**Codex**——这套双 Agent 工作流就是在它们上面跑通并打磨出来的。（Hermes 主要是个人偏好。）
@@ -24,7 +25,7 @@
 
 它能把一个错误数字、一个过期文档、一个没被来源支持的判断，包装成一段结构完整、语气自信、看起来很像真的结论。
 
-**Agent Review Kit** 想解决的就是这个问题：
+**Falsify**（一个 Agent Review Kit）想解决的就是这个问题：
 
 > 让一个 AI Agent 负责推进，让另一个 AI Agent 负责找茬。  
 > 所有修改进 Git，所有分歧进日志，所有结论回到一手资料仲裁。
@@ -92,7 +93,7 @@
 
 ## Before / After
 
-| 单 Agent 工作流 | Agent Review Kit |
+| 单 Agent 工作流 | Falsify |
 |---|---|
 | 一个 Agent 写完就信 | 一个 Agent 写，另一个 Agent 审 |
 | 错误藏在漂亮正文里 | 错误变成显式分歧 |
@@ -134,7 +135,7 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md           # → 
 
 代码审查解决的问题是：一个人写的代码，另一个人来找问题，最终合并进主干。
 
-Agent Review Kit 把这套流程搬到了 AI 研究协作上：
+Falsify 把这套流程搬到了 AI 研究协作上：
 
 - Agent A = 作者（Author）：写初稿，推进研究
 - Agent B = 审稿人（Reviewer）：挑错，要求来源，标记分歧

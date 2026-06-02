@@ -1,6 +1,7 @@
-# Agent Review Kit
+# Falsify
 
 > Don't let AI agents ship unreviewed: one drafts, another audits, Git keeps the evidence trail.
+> An **Agent Review Kit** — a review layer for AI agents.
 
 [![Link Check](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -9,7 +10,7 @@
 [中文版](./README.zh-CN.md) · [Architecture](./docs/01-architecture.md) · [Setup](./docs/02-setup.md) · [Collaboration Rules](./docs/03-collaboration.md) · [Adversarial Review](./docs/05-adversarial-review.md) · [Troubleshooting](./docs/04-troubleshooting.md)
 
 <p align="center">
-  <img src="./assets/flow-card.png" alt="Agent Review Kit: Agent A drafts → Agent B audits → conflict → first-hand sources arbitrate → Git evidence trail → ship" width="840">
+  <img src="./assets/flow-card.png" alt="Falsify: Agent A drafts → Agent B audits → conflict → first-hand sources arbitrate → Git evidence trail → ship" width="840">
 </p>
 
 > 🙏 Thanks to **Hermes Agent**, **Claude Code**, and **Codex** — the agent tooling this dual-agent workflow was built and tested on.
@@ -26,7 +27,7 @@ It's not that the agent can't write.
 
 The problem is it writes *too well*. It packages a wrong number, an outdated reference, or an unsupported claim into a confident, well-structured paragraph that looks exactly like correct output.
 
-**Agent Review Kit** changes that:
+**Falsify** (an Agent Review Kit) changes that:
 
 > One agent drafts. Another agent audits. Every change goes into Git. Every disagreement goes to first-hand sources.
 
@@ -74,7 +75,7 @@ Result:
 
 ## Before / After
 
-| Single-agent workflow | Agent Review Kit |
+| Single-agent workflow | Falsify |
 |---|---|
 | One agent writes, you trust it | One agent writes, another audits |
 | Errors hide in polished prose | Errors become explicit conflicts |
