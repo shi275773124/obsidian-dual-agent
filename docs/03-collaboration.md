@@ -16,17 +16,17 @@ Code blocks, tables, and lists are tagged as units. Don't sprinkle tags inside a
 
 ```markdown
 [AGENT-A]
-Lighter charges 0bps maker / 0bps taker for retail. The platform launched in 2024
+Venue A charges 0bps maker / 0bps taker for retail. The platform launched in 2024
 with a ZK-rollup architecture and runs on its own L2.
 
-[AGENT-B audit]: confirmed against https://docs.lighter.xyz/fees (fetched 2026-05-30)
+[AGENT-B audit]: confirmed against https://docs.example-venue-a.xyz/fees (fetched 2026-05-30)
 
 [AGENT-B]
-Adding context: Lighter Premium tier (≥$10M monthly volume) charges
-0.004% / 0.028%. This applies only to whales — Chris's $200 capital is far below.
+Adding context: Venue A's Premium tier (≥$10M monthly volume) charges
+0.004% / 0.028%. This applies only to whales — retail capital is far below.
 
 [BOTH]
-Conclusion: for retail capital under $10k, Lighter is fee-free.
+Conclusion: for retail capital under $10k, Venue A is fee-free.
 ```
 
 ## Rule 2 — Don't rewrite the other agent's tagged blocks
@@ -37,20 +37,20 @@ If you disagree with `[AGENT-A]`'s paragraph, **don't edit it**. Choose one:
 
 ```markdown
 [AGENT-A]
-HL VIP0 maker fee is 1.5bps.
+Venue B VIP0 maker fee is 1.5bps.
 
-[AGENT-B audit]: incorrect. HL VIP0 maker is **rebate** -1.5bps (you receive 1.5bps),
-not a charge. Source: https://app.hyperliquid.xyz/fees (2026-05-30).
+[AGENT-B audit]: incorrect. Venue B VIP0 maker is **rebate** -1.5bps (you receive 1.5bps),
+not a charge. Source: https://app.example-venue-b.xyz/fees (2026-05-30).
 ```
 
 **Option B — separate paragraph**:
 
 ```markdown
 [AGENT-A]
-trade.xyz Standard tier: 5.0bps maker / 1.5bps taker.
+Venue C Standard tier: 5.0bps maker / 1.5bps taker.
 
 [AGENT-B]
-Per official trade.xyz/fees (2026-05-30), Standard tier is **9.0bps / 3.0bps**.
+Per official docs (2026-05-30), Venue C Standard tier is **9.0bps / 3.0bps**.
 [AGENT-A]'s numbers above are stale; flagging for revision.
 ```
 
@@ -58,9 +58,9 @@ Per official trade.xyz/fees (2026-05-30), Standard tier is **9.0bps / 3.0bps**.
 
 ```markdown
 [AGENT-A — corrected 2026-05-30]
-trade.xyz Standard tier: 9.0bps maker / 3.0bps taker.
+Venue C Standard tier: 9.0bps maker / 3.0bps taker.
 
-[BOTH] verified against https://trade.xyz/fees on 2026-05-30.
+[BOTH] verified against https://docs.example-venue-c.xyz/fees on 2026-05-30.
 ```
 
 ## Rule 3 — Conflicts go to first-hand sources
@@ -76,9 +76,9 @@ If no first-hand source exists, the fact is marked `[UNCONFIRMED]` and both agen
 
 ```markdown
 [CONFLICT — resolved 2026-05-30]
-[AGENT-A] said Aster USD1 fee is 0.04%. [AGENT-B] said 0.5bps.
-Resolution: per https://aster.exchange/fees (fetched 2026-05-30):
-> "USD1 perpetuals: 0.04% maker / 0.04% taker"
+[AGENT-A] said Venue D's stablecoin-pair fee is 0.04%. [AGENT-B] said 0.5bps.
+Resolution: per https://docs.example-venue-d.xyz/fees (fetched 2026-05-30):
+> "stablecoin-margined perpetuals: 0.04% maker / 0.04% taker"
 [AGENT-A] was correct. [AGENT-B] confused units (0.04% = 4bps, not 0.5bps).
 ```
 
@@ -102,9 +102,9 @@ Anything below #4 should be marked `[UNCONFIRMED]` until promoted.
 - **D** — community claim, unverified
 
 ```markdown
-[AGENT-A][A] Lighter retail fee: 0bps/0bps (verified 2026-05-30 via app)
-[AGENT-A][C] Lighter daily volume: ~$200M (per DeFiLlama 2026-05-29)
-[AGENT-A][D] Lighter targeting Q4 2026 token distribution (X rumor, unconfirmed)
+[AGENT-A][A] Venue A retail fee: 0bps/0bps (verified 2026-05-30 via app)
+[AGENT-A][C] Venue A daily volume: ~$200M (per aggregator 2026-05-29)
+[AGENT-A][D] Venue A targeting Q4 2026 token distribution (X rumor, unconfirmed)
 ```
 
 ## Write zones (who owns what)

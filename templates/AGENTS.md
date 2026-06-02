@@ -84,7 +84,7 @@ Any change to a running system (config edit, service restart, deploy, schema cha
 - `[C]` — secondary source (aggregator, blog post)
 - `[D]` — community claim, unverified
 
-Example: `[AGENT-A][A] HL VIP0 maker rebate: -1.5bps (verified 2026-05-30 via app)`
+Example: `[AGENT-A][A] Venue B VIP0 maker rebate: -1.5bps (verified 2026-05-30 via app)`
 
 ## Write zones
 

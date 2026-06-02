@@ -16,17 +16,17 @@ Agent 写的每段都加前缀（或后缀）：
 
 ```markdown
 [AGENT-A]
-Lighter 散户费率 0bps maker / 0bps taker。2024 上线，ZK-rollup 架构，
+Venue A 散户费率 0bps maker / 0bps taker。2024 上线，ZK-rollup 架构，
 跑在自己的 L2 上。
 
-[AGENT-B audit]: 已与 https://docs.lighter.xyz/fees 比对（2026-05-30 抓取）
+[AGENT-B audit]: 已与 https://docs.example-venue-a.xyz/fees 比对（2026-05-30 抓取）
 
 [AGENT-B]
-补充：Lighter Premium 档（月成交 ≥$10M）是 0.004% / 0.028%。只有鲸鱼吃得到，
-Chris $200 资金远低于此线。
+补充：Venue A 的 Premium 档（月成交 ≥$10M）是 0.004% / 0.028%。只有鲸鱼吃得到，
+retail 资金远低于此线。
 
 [BOTH]
-结论：retail 资金 < $10k 的话 Lighter 实际免费。
+结论：retail 资金 < $10k 的话 Venue A 实际免费。
 ```
 
 ## 规则 2 — 不动对方的标签块
@@ -37,20 +37,20 @@ Chris $200 资金远低于此线。
 
 ```markdown
 [AGENT-A]
-HL VIP0 maker 费率 1.5bps。
+Venue B VIP0 maker 费率 1.5bps。
 
-[AGENT-B audit]: 错。HL VIP0 maker 是 **rebate** -1.5bps（你**收到** 1.5bps），
-不是支出。来源：https://app.hyperliquid.xyz/fees (2026-05-30)。
+[AGENT-B audit]: 错。Venue B VIP0 maker 是 **rebate** -1.5bps（你**收到** 1.5bps），
+不是支出。来源：https://app.example-venue-b.xyz/fees (2026-05-30)。
 ```
 
 **B — 另起一段**：
 
 ```markdown
 [AGENT-A]
-trade.xyz Standard 档：5.0bps maker / 1.5bps taker。
+Venue C Standard 档：5.0bps maker / 1.5bps taker。
 
 [AGENT-B]
-按 trade.xyz/fees 官方页（2026-05-30），Standard 档是 **9.0bps / 3.0bps**。
+按官方 docs（2026-05-30），Venue C Standard 档是 **9.0bps / 3.0bps**。
 [AGENT-A] 上面的数字过期，标记待修。
 ```
 
@@ -58,9 +58,9 @@ trade.xyz Standard 档：5.0bps maker / 1.5bps taker。
 
 ```markdown
 [AGENT-A — 已修正 2026-05-30]
-trade.xyz Standard 档：9.0bps maker / 3.0bps taker。
+Venue C Standard 档：9.0bps maker / 3.0bps taker。
 
-[BOTH] 已对照 https://trade.xyz/fees（2026-05-30）核实。
+[BOTH] 已对照 https://docs.example-venue-c.xyz/fees（2026-05-30）核实。
 ```
 
 ## 规则 3 — 冲突走一手 docs
@@ -76,9 +76,9 @@ trade.xyz Standard 档：9.0bps maker / 3.0bps taker。
 
 ```markdown
 [CONFLICT — 已裁决 2026-05-30]
-[AGENT-A] 说 Aster USD1 费率 0.04%。[AGENT-B] 说 0.5bps。
-仲裁：按 https://aster.exchange/fees（2026-05-30 抓取）：
-> "USD1 perpetuals: 0.04% maker / 0.04% taker"
+[AGENT-A] 说 Venue D 稳定币对费率 0.04%。[AGENT-B] 说 0.5bps。
+仲裁：按 https://docs.example-venue-d.xyz/fees（2026-05-30 抓取）：
+> "stablecoin-margined perpetuals: 0.04% maker / 0.04% taker"
 [AGENT-A] 对。[AGENT-B] 单位混了（0.04% = 4bps，不是 0.5bps）。
 ```
 
@@ -102,9 +102,9 @@ trade.xyz Standard 档：9.0bps maker / 3.0bps taker。
 - **D** — 社区/KOL 未核实
 
 ```markdown
-[AGENT-A][A] Lighter retail 费率：0bps/0bps（2026-05-30 app 内核实）
-[AGENT-A][C] Lighter 日成交 ~$200M（按 DeFiLlama 2026-05-29）
-[AGENT-A][D] Lighter 计划 Q4 2026 发币（X 传闻，未核实）
+[AGENT-A][A] Venue A retail 费率：0bps/0bps（2026-05-30 app 内核实）
+[AGENT-A][C] Venue A 日成交 ~$200M（按聚合器 2026-05-29）
+[AGENT-A][D] Venue A 计划 Q4 2026 发币（X 传闻，未核实）
 ```
 
 ## 写区（谁负责什么）
