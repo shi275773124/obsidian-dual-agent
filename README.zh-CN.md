@@ -1,7 +1,7 @@
 # Falsify · 证伪
 
-> **你的 unfair advantage:让两个不同厂商的顶尖 AI 互相拷问，你只拿活下来的结论。**
-> 一次提问，它们替你死磕。费 token，省脑子——而且这是单厂商一个 `--verify` 复制不了的:OpenAI 不会让你用 Claude 当审稿人,跨厂商互查只有你能做。
+> **你的 unfair advantage:让两个不同厂商的顶尖 AI 互相审查，你只取站得住脚的结论。**
+> 一次提问，它们替你死磕。花 token，省心力——而且这是单厂商一个 `--verify` 复制不了的:OpenAI 不会让你用 Claude 当审稿人,跨厂商互查只有你能做。
 
 [![falsify](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -17,7 +17,7 @@
 
 ---
 
-单 AI 写完，你得自己验。**Falsify 让第二个、不同的顶尖模型把它的活拆一遍**——错的数字、站不住的结论，在进你眼睛之前就被挑出来。一个写，一个审，Git 留证据链。
+单 AI 写完，你得自己验。**Falsify 让第二个、不同的顶尖模型把它的活拆一遍**——错的数字、站不住的结论，到不了你眼前。一个写，一个审，Git 留证据链。
 
 <p align="center">
   <img src="./assets/demo.gif" alt="falsify review 实跑：Skeptic 抓出 4+ 处问题 → Verdict: HOLD" width="760">
@@ -29,11 +29,11 @@
 
 ## 为什么值
 
-- **省事** —— 一次劳动,拿到一份被两个顶尖大脑过过的报告。
+- **省事** —— 一次劳动,拿到一份已经过两个顶尖大脑审视的报告。
 - **1 + 1 > 2** —— 两个不同模型互查,一个的盲区被另一个补上。
-- **看得见的稳** —— 它真能抓出单模型会 ship 的错(见下)。
+- **不是感觉稳,是真能验证** —— 它确实抓得出单模型会 ship 的错。下面有真实案例。
 
-适合:用 AI 做研究/竞品/技术选型的工程师、要可靠输出又不想逐字核对的人、想把 AI 决策做得可审计的团队——以及不想动脑的小白(fork [`demo-vault/`](./demo-vault/) 填空就能跑)。
+适合:用 AI 做研究/竞品/技术选型的工程师、要可靠输出又不想逐字核对的人、想把 AI 决策做得可审计的团队——以及想快速上手的新用户(fork [`demo-vault/`](./demo-vault/) 填空就能跑)。
 
 ---
 
