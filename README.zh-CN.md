@@ -1,6 +1,6 @@
 # Agent Review Kit
 
-> 给 AI Agent 加一层"代码审查"：一个写，一个审，Git 留证据链。
+> 别让 AI Agent 写完就 Ship：一个写，一个审，Git 留证据链。
 
 [![Link Check](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -212,6 +212,24 @@ A 说费率 4.5bps，B 说 9.0bps——谁嗓门大都没用。打开官方 docs
 
 ---
 
+## 可复制模板
+
+`templates/` 下全是即拿即用的文件，复制进你的 vault 就能开工：
+
+| 模板 | 作用 |
+|---|---|
+| [`AGENTS.md`](./templates/AGENTS.md) | 丢进 vault 根目录的规则文件，两个 Agent 启动时都读它 |
+| [`prompts/agent-a.md`](./templates/prompts/agent-a.md) | Agent A（起稿）完整 prompt |
+| [`prompts/agent-b.md`](./templates/prompts/agent-b.md) | Agent B（审计）完整 prompt |
+| [`prompts/human.md`](./templates/prompts/human.md) | Human Operator（仲裁）prompt |
+| [`kickoff.md`](./templates/kickoff.md) | 任务启动模板：范围、来源标准、分工、验收 checklist |
+| [`retro.md`](./templates/retro.md) | 复盘模板：双方各列错误 + 元复盘（防独立性漂移） |
+| [`conflict-log.md`](./templates/conflict-log.md) | 冲突记录模板 |
+| [`resolution-log.md`](./templates/resolution-log.md) | 仲裁结论模板 |
+| [`.gitignore`](./templates/.gitignore) | Obsidian 推荐忽略项 |
+
+---
+
 ## 推荐标签体系
 
 ```
@@ -281,10 +299,10 @@ A 说费率 4.5bps，B 说 9.0bps——谁嗓门大都没用。打开官方 docs
 ## Commit 规范
 
 ```
-draft(agent-a):   add initial perp dex fee table
+draft(agent-a):   add initial fee comparison table
 audit(agent-b):   flag rebate sign conflict
-resolve(human):   settle lighter fee sign using official docs
-verify(agent-b):  confirm hyperliquid vip0 fee tier
+resolve(human):   settle venue-a fee sign using official docs
+verify(agent-b):  confirm venue-b vip0 fee tier
 docs(human):      finalize report after review
 ```
 
@@ -320,6 +338,8 @@ docs(human):      finalize report after review
 │   ├── AGENTS.md                丢进 vault 根目录的规则文件
 │   ├── .gitignore               Obsidian 推荐忽略项
 │   ├── obsidian-git-settings.md 插件配置片段
+│   ├── kickoff.md               任务启动模板
+│   ├── retro.md                 复盘 + 元复盘模板
 │   ├── conflict-log.md          冲突记录模板
 │   ├── resolution-log.md        仲裁结论模板
 │   └── prompts/
@@ -342,6 +362,7 @@ docs(human):      finalize report after review
 - [ ] 增加 Claude Code 使用示例
 - [ ] 增加 Cursor 使用示例
 - [ ] 增加 OpenCode 使用示例
+- [ ] 增加 Codex 使用示例
 - [ ] 增加 Hermes Agent 双 profile 示例
 - [ ] 增加 conflict log 模板（已完成）
 - [ ] 增加 resolution log 模板（已完成）
@@ -349,6 +370,27 @@ docs(human):      finalize report after review
 - [ ] 增加单 Agent vs 双 Agent 错误拦截对比
 - [ ] 增加更多场景模板：投研、竞品分析、技术选型、代码审计、产品调研
 - [ ] 增加英文长文：Dual-Agent Peer Review Protocol
+
+---
+
+## Contributing
+
+欢迎任何形式的参与，尤其是这几类：
+
+- **新增场景模板**：投研、竞品分析、技术选型、代码审计、产品调研——任何能套用「一个写、一个审」的领域
+- **贡献脱敏案例**：真实的 conflict → resolution 样例最有说服力（记得脱敏）
+- **打磨 prompt**：让 Agent B 更会找错、更少误报
+- **接入更多 agent**：Claude Code / Cursor / OpenCode / Codex / 自研 agent 的接入示例
+- **翻译和改写**：让文档更清楚
+
+怎么开始：
+
+1. Fork 这个 repo
+2. 开一个分支，改动保持小而聚焦
+3. 提 PR，说明你解决的痛点
+4. 想先讨论就开 Issue
+
+不确定从哪下手？看 [Roadmap](#roadmap) 里没打勾的项，挑一个。
 
 ---
 

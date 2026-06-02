@@ -1,6 +1,6 @@
 # Agent Review Kit
 
-> Give AI agents a review loop: one drafts, another audits, Git keeps the evidence trail.
+> Don't let AI agents ship unreviewed: one drafts, another audits, Git keeps the evidence trail.
 
 [![Link Check](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -130,6 +130,24 @@ Full step-by-step: [docs/02-setup.md](./docs/02-setup.md)
 
 ---
 
+## Copy-paste templates
+
+Everything under `templates/` is ready to drop into your vault:
+
+| Template | What it's for |
+|---|---|
+| [`AGENTS.md`](./templates/AGENTS.md) | Rules file for your vault root — both agents read it at startup |
+| [`prompts/agent-a.md`](./templates/prompts/agent-a.md) | Agent A (drafter) full prompt |
+| [`prompts/agent-b.md`](./templates/prompts/agent-b.md) | Agent B (auditor) full prompt |
+| [`prompts/human.md`](./templates/prompts/human.md) | Human Operator (arbiter) prompt |
+| [`kickoff.md`](./templates/kickoff.md) | Task kickoff: scope, source bar, division of labor, acceptance checklist |
+| [`retro.md`](./templates/retro.md) | Retrospective: each agent lists mistakes + meta-retro (independence drift) |
+| [`conflict-log.md`](./templates/conflict-log.md) | Conflict tracking template |
+| [`resolution-log.md`](./templates/resolution-log.md) | Resolution tracking template |
+| [`.gitignore`](./templates/.gitignore) | Sensible Obsidian defaults |
+
+---
+
 ## Tag reference
 
 ```
@@ -148,10 +166,10 @@ Full step-by-step: [docs/02-setup.md](./docs/02-setup.md)
 ## Commit convention
 
 ```
-draft(agent-a):   add initial perp dex fee table
+draft(agent-a):   add initial fee comparison table
 audit(agent-b):   flag rebate sign conflict
-resolve(human):   settle lighter fee sign using official docs
-verify(agent-b):  confirm hyperliquid vip0 fee tier
+resolve(human):   settle venue-a fee sign using official docs
+verify(agent-b):  confirm venue-b vip0 fee tier
 docs(human):      finalize report after review
 ```
 
@@ -172,6 +190,8 @@ docs(human):      finalize report after review
 │   ├── AGENTS.md                drop into your vault root
 │   ├── .gitignore               sensible Obsidian defaults
 │   ├── obsidian-git-settings.md plugin config snippet
+│   ├── kickoff.md               task kickoff template
+│   ├── retro.md                 retrospective + meta-retro template
 │   ├── conflict-log.md          conflict tracking template
 │   ├── resolution-log.md        resolution tracking template
 │   └── prompts/
@@ -205,10 +225,32 @@ It's a **protocol**: author tagging, conflict handling, and audit trail requirem
 - [ ] Claude Code usage example
 - [ ] Cursor usage example
 - [ ] OpenCode usage example
+- [ ] Codex usage example
 - [ ] Hermes Agent dual-profile example
 - [ ] Single vs dual agent error-catch comparison
 - [ ] More scenario templates: investment research, competitor analysis, tech selection, code audit, product research
 - [ ] Long-form writeup: Dual-Agent Peer Review Protocol
+
+---
+
+## Contributing
+
+Contributions welcome — especially:
+
+- **New scenario templates**: investment research, competitor analysis, tech selection, code audit, product research — anything that fits "one drafts, one audits"
+- **Sanitized case studies**: a real conflict → resolution sample is the most convincing thing you can add (redact first)
+- **Sharper prompts**: make Agent B better at catching errors with fewer false positives
+- **More agent runners**: Claude Code / Cursor / OpenCode / Codex / your own agent setup examples
+- **Translations and edits**: make the docs clearer
+
+How to start:
+
+1. Fork the repo
+2. Branch, keep changes small and focused
+3. Open a PR describing the pain point you're solving
+4. Want to discuss first? Open an Issue
+
+Not sure where to start? Pick an unchecked item from the [Roadmap](#roadmap).
 
 ---
 
