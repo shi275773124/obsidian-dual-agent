@@ -8,6 +8,8 @@
 
 [中文版](./README.zh-CN.md) · [Architecture](./docs/01-architecture.md) · [Setup](./docs/02-setup.md) · [Collaboration Rules](./docs/03-collaboration.md) · [Troubleshooting](./docs/04-troubleshooting.md)
 
+> 🙏 Thanks to **Hermes Agent**, **Claude Code**, and **Codex** — the agent tooling this dual-agent workflow was built and tested on.
+
 ---
 
 Make AI hallucinations reviewable: turn hidden errors into explicit disagreements, then resolve them with first-hand sources.

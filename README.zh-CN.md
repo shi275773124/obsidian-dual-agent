@@ -8,6 +8,8 @@
 
 [English](./README.md) · [架构](./docs/01-architecture.zh-CN.md) · [部署](./docs/02-setup.zh-CN.md) · [协作规范](./docs/03-collaboration.zh-CN.md) · [故障排查](./docs/04-troubleshooting.zh-CN.md)
 
+> 🙏 致谢 **Hermes Agent**、**Claude Code**、**Codex**——这套双 Agent 工作流就是在它们上面跑通并打磨出来的。（Hermes 主要是个人偏好。）
+
 ---
 
 ## 不是让 AI 不犯错，而是让 AI 的错误逃不掉
