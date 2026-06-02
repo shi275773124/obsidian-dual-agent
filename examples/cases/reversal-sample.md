@@ -7,9 +7,9 @@
 # Research plan: 5-year XS-momentum backtest
 
 ## Time budget
-- Review the spec: 15-20 min
-- Fix spec + pull data + run the backtest: 60-90 min
-- Review the results: 15-20 min
-- Write the verdict: 10 min
+- Review the spec: 1-2 min
+- Fix spec + pull data + run the backtest: 1-2 min
+- Review the results: 1-2 min
+- Write the verdict: 1-2 min
 
-**Total: ~110-130 min.**
+**Total: ~5-10 min.** (Removed the buffer per feedback that the plan was too long.)
