@@ -34,5 +34,5 @@ verify(agent-b):  confirm venue-c premium tier + venue-d collateral row
 docs(human):      finalize table after review
 ```
 
-Each correction is a commit with an author. Anyone can `git log`/`git blame` the
-table and see which number changed, who changed it, and which source closed it.
+[BOTH] Each correction is a commit with an author. Anyone can `git log`/`git blame`
+the table and see which number changed, who changed it, and which source closed it.

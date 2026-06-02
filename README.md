@@ -85,6 +85,36 @@ Result:
 
 ---
 
+## ⚙️ The `falsify` CLI
+
+A protocol enforced by discipline rots. `falsify` compresses it into one command —
+zero dependencies, Python 3.8+, any OpenAI-compatible endpoint (OpenAI, OpenRouter,
+a local proxy).
+
+```bash
+pip install -e .          # or just run python falsify.py
+
+export FALSIFY_API_BASE=https://api.openai.com/v1
+export FALSIFY_API_KEY=sk-...
+export FALSIFY_MODEL=<reviewer model>    # Agent B / the Skeptic
+
+falsify lint   report.md     # no API: tag + ship-blocker check
+falsify review report.md     # the Skeptic attacks the draft -> Verdict
+falsify run    brief.md      # full loop: Agent A drafts -> Agent B audits
+```
+
+`review`'s **exit code is the Verdict**: `PROCEED=0 / HOLD=1 / ARCHIVE=2` — drop it
+straight into CI. Don't let AI agents ship unreviewed.
+
+Try `lint` with no key (pure local, zero API):
+
+```bash
+falsify lint examples/comparison-case-study/01-agent-a-draft-excerpt.md   # NOT shippable
+falsify lint examples/comparison-case-study/05-final-excerpt.md           # SHIPPABLE
+```
+
+---
+
 ## Architecture
 
 ```mermaid
@@ -211,6 +241,8 @@ for the cross-model setup, [examples/cross-model-rpc.md](./examples/cross-model-
 .
 ├── README.md                    (you are here)
 ├── README.zh-CN.md              Chinese version
+├── falsify.py                   CLI engine (lint / review / draft / run)
+├── pyproject.toml               pip install -> falsify command
 ├── docs/
 │   ├── 01-architecture.md       why and how it works
 │   ├── 02-setup.md              VPS + laptop step-by-step
@@ -256,6 +288,7 @@ It's a **protocol**: author tagging, conflict handling, and audit trail requirem
 
 ## Roadmap
 
+- [x] CLI engine (`falsify`): lint + review + verdict gate (see [`falsify.py`](./falsify.py))
 - [x] Forkable demo vault (see [`demo-vault/`](./demo-vault/))
 - [ ] Full case study: ~12-venue horizontal research postmortem (sanitized)
 - [ ] Real conflict samples: A drafts wrong, B catches it, docs arbitrate

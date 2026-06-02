@@ -103,6 +103,33 @@
 
 ---
 
+## ⚙️ 引擎：`falsify` CLI
+
+协议再好，靠自律执行迟早会废。`falsify` 把它压成一条命令——零依赖、Python 3.8+、任意 OpenAI 兼容端点（OpenAI / OpenRouter / 本地代理都行）。
+
+```bash
+pip install -e .          # 或直接用 python falsify.py
+
+export FALSIFY_API_BASE=https://api.openai.com/v1
+export FALSIFY_API_KEY=sk-...
+export FALSIFY_MODEL=<reviewer 模型>     # Agent B / Skeptic（较真审稿人）
+
+falsify lint   report.md     # 零 API：标签 + ship-blocker 检查
+falsify review report.md     # Skeptic 攻击草稿 → Verdict
+falsify run    brief.md      # 全流程：Agent A 起稿 → Agent B 审计
+```
+
+`review` 的**退出码就是 Verdict**：`PROCEED=0 / HOLD=1 / ARCHIVE=2`——直接塞进 CI，别让 AI 写完就 ship。
+
+不用 key 也能先感受 lint（纯本地、零 API）：
+
+```bash
+falsify lint examples/comparison-case-study/01-agent-a-draft-excerpt.md   # → NOT shippable
+falsify lint examples/comparison-case-study/05-final-excerpt.md           # → SHIPPABLE
+```
+
+---
+
 ## 核心思路：把 AI 协作改造成类似代码审查的流程
 
 代码审查解决的问题是：一个人写的代码，另一个人来找问题，最终合并进主干。
@@ -349,6 +376,8 @@ docs(human):      finalize report after review
 .
 ├── README.md                    英文版
 ├── README.zh-CN.md              （你在这里）
+├── falsify.py                   CLI 引擎（lint / review / draft / run）
+├── pyproject.toml               pip install → falsify 命令
 ├── docs/
 │   ├── 01-architecture.md       架构与原理（英文）
 │   ├── 01-architecture.zh-CN.md 架构与原理（中文）
@@ -388,6 +417,7 @@ docs(human):      finalize report after review
 
 ## Roadmap
 
+- [x] CLI 引擎 `falsify`：lint + review + verdict 闸门（见 [`falsify.py`](./falsify.py)）
 - [x] 增加可直接 fork 的 demo vault（见 [`demo-vault/`](./demo-vault/)）
 - [ ] 增加完整 case study：约 12 家竞品横向研究复盘（脱敏版）
 - [ ] 增加真实冲突样例：A 写错、B 审出、官方 docs 仲裁
