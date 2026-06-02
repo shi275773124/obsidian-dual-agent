@@ -55,14 +55,12 @@
 ## 一键开跑
 
 ```bash
-pip install -e .          # 或直接 python falsify.py
-
-export FALSIFY_API_BASE=https://api.deepseek.com/v1   # 任意 OpenAI 兼容端点
-export FALSIFY_API_KEY=sk-...
-export FALSIFY_MODEL=deepseek-chat                    # reviewer / Skeptic
-
-falsify review report.md     # 第二个模型审一遍 → Verdict（PROCEED/HOLD/ARCHIVE）
+pip install -e .                       # 或直接 python falsify.py
+export DEEPSEEK_API_KEY=sk-...         # 或 OPENAI_API_KEY / OPENROUTER_API_KEY…
+falsify review report.md -p deepseek   # 第二个模型审一遍 → Verdict（PROCEED/HOLD/ARCHIVE）
 ```
+
+`-p` 是 provider 预设(deepseek / openai / openrouter / moonshot / siliconflow / local),自动填好 endpoint 和模型——**你只给 key**。嫌每次敲麻烦就 `falsify init` 存一次,之后 `falsify review report.md` 即可;也能 `cat report.md | falsify review -` 粘贴即跑。
 
 `review` 的**退出码就是 Verdict**(`PROCEED=0 / HOLD=1 / ARCHIVE=2`)——直接塞进 CI。
 不用 key 先试 `lint`(纯本地、零 API):

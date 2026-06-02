@@ -53,14 +53,12 @@ Two independent agents (different models) ran a horizontal comparison of **~12 c
 ## One command
 
 ```bash
-pip install -e .          # or just python falsify.py
-
-export FALSIFY_API_BASE=https://api.deepseek.com/v1   # any OpenAI-compatible endpoint
-export FALSIFY_API_KEY=sk-...
-export FALSIFY_MODEL=deepseek-chat                    # the reviewer / Skeptic
-
-falsify review report.md     # a second model audits it -> Verdict (PROCEED/HOLD/ARCHIVE)
+pip install -e .                       # or just python falsify.py
+export DEEPSEEK_API_KEY=sk-...         # or OPENAI_API_KEY / OPENROUTER_API_KEY…
+falsify review report.md -p deepseek   # a second model audits it -> Verdict (PROCEED/HOLD/ARCHIVE)
 ```
+
+`-p` is a provider preset (deepseek / openai / openrouter / moonshot / siliconflow / local) that fills in the endpoint and model — **you only supply the key**. Tired of typing it? `falsify init` saves it once, then just `falsify review report.md`; or `cat report.md | falsify review -` to paste-and-go.
 
 `review`'s **exit code is the Verdict** (`PROCEED=0 / HOLD=1 / ARCHIVE=2`) — drop it straight into CI.
 Try `lint` with no key (pure local):
