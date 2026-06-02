@@ -1,0 +1,34 @@
+name: falsify
+
+# Smoke test for this repo: prove the `falsify` gate behaves on every push —
+# a shippable doc passes, a draft with open issues is blocked. No API key needed.
+# (The drop-in PR gate for *your own* repo is templates/github-action-falsify.yml.)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: falsify --version
+        run: python falsify.py --version
+
+      - name: A shippable doc must PASS lint
+        run: python falsify.py lint examples/comparison-case-study/05-final-excerpt.md
+
+      - name: A draft with open issues must be BLOCKED
+        run: |
+          if python falsify.py lint examples/comparison-case-study/01-agent-a-draft-excerpt.md; then
+            echo "::error::lint should have blocked the draft, but it passed"
+            exit 1
+          fi
+          echo "OK — draft correctly blocked (non-zero exit)"

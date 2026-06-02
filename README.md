@@ -1,354 +1,108 @@
 # Falsify
 
-> Don't let AI agents ship unreviewed: one drafts, another audits, Git keeps the evidence trail.
-> An **Agent Review Kit** — a review layer for AI agents.
+> **Your unfair advantage.** Drop in one prompt; two top AIs cross-examine it; you keep only the conclusion that survives.
+> You move once, they fight it out. Spends tokens, saves your brain.
 
-[![Link Check](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/link-check.yml)
+[![falsify](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![中文](https://img.shields.io/badge/lang-中文-red.svg)](./README.zh-CN.md)
 
-[中文版](./README.zh-CN.md) · [Architecture](./docs/01-architecture.md) · [Setup](./docs/02-setup.md) · [Collaboration Rules](./docs/03-collaboration.md) · [Adversarial Review](./docs/05-adversarial-review.md) · [Troubleshooting](./docs/04-troubleshooting.md)
+[中文版](./README.zh-CN.md) · [Setup](./docs/02-setup.md) · [Layer 1 · Peer Review](./docs/03-collaboration.md) · [Layer 2 · Adversarial Review](./docs/05-adversarial-review.md)
 
 <p align="center">
-  <img src="./assets/flow-card.png" alt="Falsify: Agent A drafts → Agent B audits → conflict → first-hand sources arbitrate → Git evidence trail → ship" width="840">
+  <img src="./assets/flow-card.png" alt="Falsify: Agent A drafts → Agent B audits → conflict → first-hand sources arbitrate → Git evidence trail → ship" width="820">
 </p>
 
-> 🙏 Thanks to **Hermes Agent**, **Claude Code**, and **Codex** — the agent tooling this dual-agent workflow was built and tested on.
+> 🙏 Thanks to **Hermes Agent**, **Claude Code**, and **Codex** — the tooling this workflow was built and tested on.
 
 ---
 
-Make AI hallucinations reviewable: turn hidden errors into explicit disagreements, then resolve them with first-hand sources.
+A single AI writes it; you have to verify it. **Falsify makes a second, different top model take its work apart** — wrong numbers and unsupported conclusions get caught before they reach your eyes. One drafts, one audits, Git keeps the evidence trail.
+
+<p align="center">
+  <img src="./assets/demo.gif" alt="falsify review run: the Skeptic catches 4+ issues, returns Verdict: HOLD" width="760">
+</p>
+
+> A real run: a DeepSeek model as the Skeptic audits a draft, catches every seeded error, returns `Verdict: HOLD`. Verbatim transcript: [examples/.../06](./examples/comparison-case-study/06-real-review-deepseek.md).
 
 ---
 
-## The problem with single-agent research
+## Why it's worth it
 
-It's not that the agent can't write.
-
-The problem is it writes *too well*. It packages a wrong number, an outdated reference, or an unsupported claim into a confident, well-structured paragraph that looks exactly like correct output.
-
-And the errors come in **two kinds**:
-
-- **Wrong number** — a specific fact is wrong (a fee, a date, a citation that doesn't hold up).
-- **Wrong conclusion** — every number is right, but the wrong tool was used, or a partial truth got shipped as a verdict.
-
-**Falsify** (an Agent Review Kit) covers both: **Layer 1 peer review** catches wrong numbers, **Layer 2 adversarial review** catches wrong conclusions. It changes that:
-
-> One agent drafts. Another agent audits. Every change goes into Git. Every disagreement goes to first-hand sources.
-
-This is a **Dual-Agent Peer Review Protocol** — a workflow, not a plugin:
-
-- **Agent A**: drafts, researches, advances
-- **Agent B**: audits, challenges, finds errors
-- **Git**: records every change
-- **Obsidian**: human reading and search layer (optional)
-- **First-hand sources**: final arbiter — official docs, APIs, source code, whitepapers
-
-One sentence:
-
-> **Turn AI hallucinations from hidden errors into auditable disagreements.**
+- **Less effort** — one round of work, a report two top minds already vetted.
+- **1 + 1 > 2** — two different models check each other; one's blind spot is the other's catch.
+- **Provable trust** — it really catches errors a single model would have shipped (below).
 
 ---
 
-## Real case: Agent B caught 4 errors before they shipped
+## Real case: 4 errors that would have shipped, caught by the second AI
 
-Two independent agents ran a horizontal comparison of **~12 competing venues** in
-one category — fee schedules and incentive-program data. (Venue names and the
-specific vertical are redacted; the point is the method, not the targets.)
+Two independent agents (different models) ran a horizontal comparison of **~12 competing venues** (names redacted). One draft, one audit, a report in **under 30 minutes**: 80+ cited URLs, and **Agent B caught 4 critical pricing errors** that would have shipped without it.
 
-- Agent A drafted the report
-- Agent B audited every section
-- Conflicts went to official docs, API responses, source code
-- Git tracked the full process
-
-Result:
-
-- Total time: under 30 minutes
-- Final report: 80+ cited source URLs
-- Agent B caught: **4 critical pricing errors**
-
-| Error caught | Without Agent B | With dual-agent review |
+| Caught | Single agent | After dual-agent review |
 |---|---|---|
-| Venue A fee tier copied from a peer | Wrong by 2×, table looks complete | B flagged, resolved against official docs |
-| Venue B VIP0 maker direction flipped | Rebate written as a charge, enters report | B verified fee schedule, required correction |
-| Venue C premium tier "not public" | Actually in the docs, abandoned too early | B independently verified, marked conflict |
-| Venue D base fee wrong row | Wrong row in cross-venue comparison | B audited table, required source confirmation |
+| Venue A fee copied from a peer | Wrong by 2×, looks complete | B flags, resolves against docs |
+| Venue B VIP0 maker sign flipped | Rebate written as a charge | B re-checks fee schedule |
+| Venue C premium tier "not public" | Actually in the docs | B verifies, marks conflict |
+| Venue D base fee wrong row | Wrong row in the table | B audits, requires source |
 
-> **The goal isn't a perfect AI. It's making AI errors harder to hide.**
-
----
-
-## Before / After
-
-| Single-agent workflow | Falsify |
-|---|---|
-| One agent writes, you trust it | One agent writes, another audits |
-| Errors hide in polished prose | Errors become explicit conflicts |
-| Sources may not support conclusions | Every dispute goes to first-hand sources |
-| Changes are invisible | Git keeps the full trail |
-| Human reads the whole thing | Human focuses on conflict zones |
-| Ship when it "looks right" | Ship after `[BOTH]` confirmed |
+> Not a perfect AI — just errors that **can't ship quietly**.
 
 ---
 
-## ⚙️ The `falsify` CLI
-
-A protocol enforced by discipline rots. `falsify` compresses it into one command —
-zero dependencies, Python 3.8+, any OpenAI-compatible endpoint (OpenAI, OpenRouter,
-DeepSeek, a local proxy).
-
-<p align="center">
-  <img src="./assets/demo.gif" alt="falsify review run: the Skeptic catches 4+ issues, returns Verdict: HOLD, exit 1" width="760">
-</p>
-
-> That's a **real run**: a DeepSeek model as the Skeptic audits a sanitized draft,
-> catches every seeded error, and returns `Verdict: HOLD` (exit 1). Full verbatim
-> transcript: [examples/.../06-real-review-deepseek.md](./examples/comparison-case-study/06-real-review-deepseek.md).
+## One command
 
 ```bash
-pip install -e .          # or just run python falsify.py
+pip install -e .          # or just python falsify.py
 
-export FALSIFY_API_BASE=https://api.openai.com/v1
+export FALSIFY_API_BASE=https://api.deepseek.com/v1   # any OpenAI-compatible endpoint
 export FALSIFY_API_KEY=sk-...
-export FALSIFY_MODEL=<reviewer model>    # Agent B / the Skeptic
+export FALSIFY_MODEL=deepseek-chat                    # the reviewer / Skeptic
 
-falsify lint   report.md     # no API: tag + ship-blocker check
-falsify review report.md     # the Skeptic attacks the draft -> Verdict
-falsify run    brief.md      # full loop: Agent A drafts -> Agent B audits
+falsify review report.md     # a second model audits it -> Verdict (PROCEED/HOLD/ARCHIVE)
 ```
 
-`review`'s **exit code is the Verdict**: `PROCEED=0 / HOLD=1 / ARCHIVE=2` — drop it
-straight into CI. Don't let AI agents ship unreviewed.
-
-Try `lint` with no key (pure local, zero API):
+`review`'s **exit code is the Verdict** (`PROCEED=0 / HOLD=1 / ARCHIVE=2`) — drop it straight into CI.
+Try `lint` with no key (pure local):
 
 ```bash
-falsify lint examples/comparison-case-study/01-agent-a-draft-excerpt.md   # NOT shippable
-falsify lint examples/comparison-case-study/05-final-excerpt.md           # SHIPPABLE
+falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABLE
 ```
 
 ---
 
-## Architecture
+## Two layers
 
-```mermaid
-flowchart LR
-    A[Agent A<br/>Draft / Advance] --> D[Draft]
-    D --> B[Agent B<br/>Audit / Challenge]
-    B --> C{Conflict?}
-    C -- No --> OK[[BOTH<br/>Confirmed]]
-    C -- Yes --> S[Source Check<br/>First-hand docs]
-    S --> R[Resolution<br/>Arbitration note]
-    R --> G[Git Commit<br/>Evidence trail]
-    G --> OK
-```
+- **[Layer 1 · Peer Review](./docs/03-collaboration.md)** — catches **wrong numbers** (cheap, default): tag every paragraph, don't overwrite the other agent, conflicts go to first-hand sources.
+- **[Layer 2 · Adversarial Review](./docs/05-adversarial-review.md)** — catches **wrong conclusions** (high-stakes): verdict ladder (`PROCEED/HOLD-N/ARCHIVE`) + multi-round + G1–G4 gates + cross-model independence.
 
----
-
-## 5-minute quickstart
-
-> ⚡ Fastest path: fork [`demo-vault/`](./demo-vault/) — a pre-wired empty
-> workspace where you only edit `research/00-brief.md` to start. Below is the
-> build-from-scratch version.
-
-```bash
-# 1. Create a private GitHub repo (call it whatever)
-
-# 2. On Agent A's host
-git clone git@github.com:you/your-vault.git
-cd your-vault
-cp /path/to/this-repo/templates/AGENTS.md ./AGENTS.md
-cp /path/to/this-repo/templates/.gitignore ./.gitignore
-git add . && git commit -m "init: dual-agent rules" && git push
-
-# 3. On Agent B's host
-git clone git@github.com:you/your-vault.git
-# uses the same AGENTS.md
-
-# 4. On your laptop (optional — for human reading)
-git clone git@github.com:you/your-vault.git "$HOME/Documents/Obsidian Vault"
-# Open in Obsidian → install Obsidian Git plugin → set auto pull/push
-```
-
-Full step-by-step: [docs/02-setup.md](./docs/02-setup.md)
-
----
-
-## Layer 1 · peer review: three rules (memorize these)
-
-> Catches **wrong numbers**. Cheap, the default, for everyone.
-
-1. **Tag every paragraph**: `[AGENT-A]`, `[AGENT-B]`, or `[BOTH]`. No untagged prose.
-2. **Don't overwrite the other agent's blocks.** Add your own block underneath. Use `[AGENT-B audit]` for inline audit notes.
-3. **Conflicts go to first-hand sources.** A says 4.5bps, B says 9.0bps — neither wins by assertion. Open the official docs URL, paste the quote, cite it.
-
----
-
-## Copy-paste templates
-
-Everything under `templates/` is ready to drop into your vault:
-
-| Template | What it's for |
-|---|---|
-| [`AGENTS.md`](./templates/AGENTS.md) | Rules file for your vault root — both agents read it at startup |
-| [`prompts/agent-a.md`](./templates/prompts/agent-a.md) | Agent A (drafter) full prompt |
-| [`prompts/agent-b.md`](./templates/prompts/agent-b.md) | Agent B (auditor) full prompt |
-| [`prompts/human.md`](./templates/prompts/human.md) | Human Operator (arbiter) prompt |
-| [`kickoff.md`](./templates/kickoff.md) | Task kickoff: scope, source bar, division of labor, acceptance checklist |
-| [`retro.md`](./templates/retro.md) | Retrospective: each agent lists mistakes + meta-retro (independence drift) |
-| [`precondition-checklist.md`](./templates/precondition-checklist.md) | G1–G4 gates before any claim (catches "right facts, wrong conclusion") |
-| [`step-verify.sh`](./templates/step-verify.sh) | Multi-step pipeline guard (exists / size / not-ABORT) |
-| [`conflict-log.md`](./templates/conflict-log.md) | Conflict tracking template |
-| [`resolution-log.md`](./templates/resolution-log.md) | Resolution tracking template |
-| [`.gitignore`](./templates/.gitignore) | Sensible Obsidian defaults |
-
----
-
-## Tag reference
-
-```
-[AGENT-A]         Agent A's original draft content
-[AGENT-B]         Agent B's added content
-[AGENT-B audit]   Agent B's audit note on Agent A's content
-[BOTH]            Agreed conclusion — safe to ship
-[CONFLICT]        Unresolved disagreement — do not ship
-[RESOLUTION]      Arbitrated conclusion with first-hand source
-[NEEDS-SOURCE]    Source required, not yet trusted
-[NEEDS-AUDIT]     Flagged for Agent B review
-```
-
----
-
-## Commit convention
-
-```
-draft(agent-a):   add initial fee comparison table
-audit(agent-b):   flag rebate sign conflict
-resolve(human):   settle venue-a fee sign using official docs
-verify(agent-b):  confirm venue-b vip0 fee tier
-docs(human):      finalize report after review
-```
-
----
-
-## Layer 2 · adversarial review: when right facts produce wrong conclusions
-
-> Catches **wrong conclusions**. Bring it in for high-stakes calls — it doesn't
-> replace Layer 1, it goes one level deeper.
-
-Layer 1 catches a wrong number written prettily. The harder failure is
-**right facts, wrong conclusion** — the wrong tool on the right data, a partial
-truth shipped as a verdict, or a step that "fails closed" by writing ABORT and
-calling it done. Both agents would agree the number is correct, so Layer 1 can't
-catch it.
-
-| | Layer 1 · peer review | Layer 2 · adversarial review |
+| | Layer 1 | Layer 2 |
 |---|---|---|
-| Catches | wrong facts (numbers / sources / staleness) | right facts + wrong conclusion |
-| Mechanism | three rules + tags + first-hand arbitration | verdict ladder + multi-round + G1–G4 gates |
-| Rounds | single | multi-round, fixes must survive a fresh attack |
-| Use for | fee tables, doc audits, comparisons | go/no-go calls, production changes, tech selection |
+| Catches | wrong facts | right facts + wrong conclusion |
 | In one line | "is this number right?" | "what makes this conclusion hold?" |
 
-Layer 2 adds four things on top of the three rules:
-
-- **Verdict ladder**: `PROCEED` / `HOLD-N` / `ARCHIVE`, multi-round, fixes must survive a fresh attack
-- **G1–G4 precondition gates**: entity disambiguation / unit alignment / prior-conflict brake / ruler-object match
-- **Cross-model reviewer**: two different model families = enough independence, no second machine needed
-- **Verdict-as-file + step guards**: each pipeline step verified for exists / size / not-ABORT
-
-See [docs — Adversarial Review](./docs/05-adversarial-review.md). For why right
-facts still go wrong, read [examples/wrong-tool-right-data.md](./examples/wrong-tool-right-data.md);
-for the cross-model setup, [examples/cross-model-rpc.md](./examples/cross-model-rpc.md).
-
 ---
 
-## What's in this repo
+## What else is in here
 
-```
-.
-├── README.md                    (you are here)
-├── README.zh-CN.md              Chinese version
-├── falsify.py                   CLI engine (lint / review / draft / run)
-├── pyproject.toml               pip install -> falsify command
-├── docs/
-│   ├── 01-architecture.md       why and how it works
-│   ├── 02-setup.md              VPS + laptop step-by-step
-│   ├── 03-collaboration.md      tagging, conflict resolution
-│   ├── 04-troubleshooting.md    git conflicts, plugin issues
-│   └── 05-adversarial-review.md verdict ladder + G1–G4 + step guards
-├── templates/
-│   ├── AGENTS.md                drop into your vault root
-│   ├── .gitignore               sensible Obsidian defaults
-│   ├── obsidian-git-settings.md plugin config snippet
-│   ├── kickoff.md               task kickoff template
-│   ├── retro.md                 retrospective + meta-retro template
-│   ├── precondition-checklist.md G1–G4 claim gates
-│   ├── step-verify.sh           multi-step pipeline guard
-│   ├── conflict-log.md          conflict tracking template
-│   ├── resolution-log.md        resolution tracking template
-│   └── prompts/
-│       ├── agent-a.md           Agent A full prompt
-│       ├── agent-b.md           Agent B full prompt
-│       └── human.md             Human Operator prompt
-├── examples/
-│   ├── comparison-case-study/   Sanitized end-to-end sample (draft→audit→resolve→ship)
-│   ├── cross-model-rpc.md       Cross-model review via any OAI-compatible endpoint
-│   └── wrong-tool-right-data.md Sanitized case: right facts, wrong conclusion (origin of G4)
-├── demo-vault/                  Forkable empty workspace (edit 00-brief and go)
-├── assets/
-│   └── flow-card.png            Shareable flow diagram
-└── LICENSE                      MIT
-```
-
----
-
-## What this is not
-
-- Not a magic prompt that makes AI smarter
-- Not a zero-error guarantee
-- Not Obsidian-specific (any Markdown editor works)
-- Not tied to a specific agent framework
-
-It's a **protocol**: author tagging, conflict handling, and audit trail requirements for AI research collaboration.
+- [`templates/`](./templates/) — ready to use: `AGENTS.md`, three prompts, kickoff/retro, conflict/resolution logs, CI template
+- [`demo-vault/`](./demo-vault/) — forkable empty workspace; edit `00-brief.md` and go
+- [`examples/comparison-case-study/`](./examples/comparison-case-study/) — sanitized end-to-end sample + one real run
+- [`docs/`](./docs/) — [architecture](./docs/01-architecture.md) · [setup](./docs/02-setup.md) · [Layer 1](./docs/03-collaboration.md) · [Layer 2](./docs/05-adversarial-review.md) · [troubleshooting](./docs/04-troubleshooting.md)
 
 ---
 
 ## Roadmap
 
-- [x] CLI engine (`falsify`): lint + review + verdict gate (see [`falsify.py`](./falsify.py))
-- [x] Forkable demo vault (see [`demo-vault/`](./demo-vault/))
-- [ ] Full case study: ~12-venue horizontal research postmortem (sanitized)
-- [ ] Real conflict samples: A drafts wrong, B catches it, docs arbitrate
-- [ ] Claude Code usage example
-- [ ] Cursor usage example
-- [ ] OpenCode usage example
-- [ ] Codex usage example
-- [ ] Hermes Agent dual-profile example
-- [ ] Single vs dual agent error-catch comparison
-- [ ] More scenario templates: investment research, competitor analysis, tech selection, code audit, product research
-- [ ] Long-form writeup: Dual-Agent Peer Review Protocol
-
----
+- [x] CLI engine `falsify` (lint / review / verdict gate)
+- [x] Forkable demo vault · sanitized case · flow card · real-run GIF
+- [ ] GitHub Action: block a PR that doesn't pass the verdict
+- [ ] One-click: fewer settings, sane defaults, paste-and-go
+- [ ] More scenario templates: research / competitor / tech selection / code audit
 
 ## Contributing
 
-Contributions welcome — especially:
-
-- **New scenario templates**: investment research, competitor analysis, tech selection, code audit, product research — anything that fits "one drafts, one audits"
-- **Sanitized case studies**: a real conflict → resolution sample is the most convincing thing you can add (redact first)
-- **Sharper prompts**: make Agent B better at catching errors with fewer false positives
-- **More agent runners**: Claude Code / Cursor / OpenCode / Codex / your own agent setup examples
-- **Translations and edits**: make the docs clearer
-
-How to start:
-
-1. Fork the repo
-2. Branch, keep changes small and focused
-3. Open a PR describing the pain point you're solving
-4. Want to discuss first? Open an Issue
-
-Not sure where to start? Pick an unchecked item from the [Roadmap](#roadmap).
+Welcome: new scenario templates, sanitized case studies, sharper prompts, more agent-runner examples, translations. Fork → small focused change → PR (name the pain you're solving). Open an Issue to discuss first.
 
 ---
 
@@ -356,16 +110,10 @@ Not sure where to start? Pick an unchecked item from the [Roadmap](#roadmap).
 
 MIT — fork it, ship it, write a blog post about it.
 
----
+<details>
+<summary>Support</summary>
 
-## Support the project
+- 🐦 [@aishikejian](https://x.com/aishikejian) · ☕ [Buy me a coffee](https://buymeacoffee.com/chris168) · ⭐ Star it
+- 🪙 ETH / USDT-ERC20 / any EVM: `0x1C06DeC922015ee7817aC21d37Da2da2F07d7119`
 
-If this saved you a few hours:
-
-- 🐦 Follow [@aishikejian](https://x.com/aishikejian) on X — more dual-agent / AI ops experiments coming
-- ☕ [Buy me a coffee](https://buymeacoffee.com/chris168)
-- ⭐ Star this repo so others find it
-- 🪙 Crypto tips (ETH / USDT-ERC20 / any EVM chain):
-  ```
-  0x1C06DeC922015ee7817aC21d37Da2da2F07d7119
-  ```
+</details>
