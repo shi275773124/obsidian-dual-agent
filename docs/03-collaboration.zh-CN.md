@@ -2,6 +2,8 @@
 
 [English](./03-collaboration.md) · [返回 README](../README.zh-CN.md)
 
+**这是第 1 层——互审**，抓的是*数字错*。遇到"事实对、结论却错"的高风险场景，加上第 2 层：[05 · 对抗审议](./05-adversarial-review.zh-CN.md)。
+
 Agent 一旦不守这些规则，整套 pattern 立刻失效。在 prompt 层强制。
 
 ## 规则 1 — 每段都标作者

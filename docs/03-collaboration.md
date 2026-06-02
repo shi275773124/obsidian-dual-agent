@@ -2,6 +2,10 @@
 
 [中文](./03-collaboration.zh-CN.md) · [Back to README](../README.md)
 
+**This is Layer 1 — peer review.** It catches *wrong numbers*. For high-stakes
+calls where the facts are right but the conclusion isn't, add Layer 2:
+[05 · Adversarial Review](./05-adversarial-review.md).
+
 The pattern stops working the moment agents stop following these rules. Enforce them at prompt level.
 
 ## Rule 1 — Tag every paragraph

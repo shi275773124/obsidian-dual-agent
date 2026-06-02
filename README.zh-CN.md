@@ -25,7 +25,12 @@
 
 它能把一个错误数字、一个过期文档、一个没被来源支持的判断，包装成一段结构完整、语气自信、看起来很像真的结论。
 
-**Falsify**（一个 Agent Review Kit）想解决的就是这个问题：
+而且 AI 的错有**两种**：
+
+- **数字错** —— 一个具体事实写错了（费率、日期、引用对不上）。
+- **结论错** —— 数字全对，却用错了工具、或把局部当成完整结论，结论照样错。
+
+**Falsify**（一个 Agent Review Kit）两层都管：**第 1 层互审**抓数字错，**第 2 层对抗审议**抓结论错。它想解决的就是这个问题：
 
 > 让一个 AI Agent 负责推进，让另一个 AI Agent 负责找茬。  
 > 所有修改进 Git，所有分歧进日志，所有结论回到一手资料仲裁。
@@ -237,7 +242,9 @@ git clone git@github.com:you/your-vault.git "$HOME/Documents/Obsidian Vault"
 
 ---
 
-## 最关键的三条规则
+## 第 1 层 · 互审：最关键的三条规则
+
+> 抓**数字错**。便宜、默认、人人用。
 
 **规则一：每段都要标作者**
 
@@ -301,18 +308,28 @@ A 说费率 4.5bps，B 说 9.0bps——谁嗓门大都没用。打开官方 docs
 
 ---
 
-## 进阶：当事实对、结论却错（对抗审议 v2）
+## 第 2 层 · 对抗审议：当事实对、结论却错
 
-普通互审拦的是"把错数字写漂亮"。但还有更难的一类错：**事实全对，结论却错**——用错的工具量了对的数据，把局部事实当完整结论，或者写个 ABORT 文件就当"完成"。
+> 抓**结论错**。高风险时再上——它不取代第 1 层，是在它之上更深一层。
 
-进阶变体在三条规则之上再加四样：
+第 1 层拦的是"把错数字写漂亮"。但还有更难的一类错:**事实全对,结论却错**——用错的工具量了对的数据,把局部事实当完整结论,或者写个 ABORT 文件就当"完成"。两个 agent 都会同意那个数字,所以第 1 层根本拦不住。
 
-- **Verdict ladder**：`PROCEED` / `HOLD-N` / `ARCHIVE`，多轮对抗，修复版要扛过重新审
-- **G1–G4 前置闸门**：实体消歧 / 量纲对齐 / 先验冲突刹车 / 尺子-对象匹配
-- **跨模型 reviewer**：两个不同模型族就够独立，不用两台机器
-- **verdict-as-file + 步骤守卫**：多步 pipeline 每步验"存在 / 够大 / 不是 ABORT 开头"
+| | 第 1 层 · 互审 | 第 2 层 · 对抗审议 |
+|---|---|---|
+| 抓什么 | 错的事实(数字/来源/过期) | 对的事实 + 错的结论 |
+| 机制 | 三条规则 + 标签 + 一手仲裁 | verdict ladder + 多轮 + G1–G4 闸门 |
+| 轮次 | 单轮 | 多轮,修复要扛过重新审 |
+| 适用 | 费率表、文档审计、竞品对比 | 策略生死判定、生产变更、方案选型 |
+| 一句话 | "这个数字对不对?" | "这个结论凭什么成立?" |
 
-详见 [docs/05 · 对抗审议](./docs/05-adversarial-review.zh-CN.md)。为什么"事实对也会结论错"，看 [examples/wrong-tool-right-data.md](./examples/wrong-tool-right-data.md)；跨模型怎么跑见 [examples/cross-model-rpc.md](./examples/cross-model-rpc.md)。
+第 2 层在三条规则之上再加四样:
+
+- **Verdict ladder**:`PROCEED` / `HOLD-N` / `ARCHIVE`,多轮对抗,修复版要扛过重新审
+- **G1–G4 前置闸门**:实体消歧 / 量纲对齐 / 先验冲突刹车 / 尺子-对象匹配
+- **跨模型 reviewer**:两个不同模型族就够独立,不用两台机器
+- **verdict-as-file + 步骤守卫**:多步 pipeline 每步验"存在 / 够大 / 不是 ABORT 开头"
+
+详见 [docs · 对抗审议](./docs/05-adversarial-review.zh-CN.md)。为什么"事实对也会结论错",看 [examples/wrong-tool-right-data.md](./examples/wrong-tool-right-data.md);跨模型怎么跑见 [examples/cross-model-rpc.md](./examples/cross-model-rpc.md)。
 
 ---
 

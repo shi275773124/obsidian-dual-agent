@@ -1,8 +1,12 @@
-# 05. Adversarial Review (deep variant)
+# 05. Adversarial Review (Layer 2)
 
 [中文](./05-adversarial-review.zh-CN.md) · [Back to README](../README.md)
 
-Simple peer review (docs 03) catches **a wrong number written prettily**. It does
+**This is Layer 2.** [Layer 1 — peer review](./03-collaboration.md) catches
+*wrong numbers*; this catches *wrong conclusions*. It doesn't replace Layer 1 —
+it goes one level deeper, for high-stakes calls.
+
+Peer review (docs 03) catches **a wrong number written prettily**. It does
 not catch the harder failure: **right facts, wrong conclusion** — the agent used
 the wrong tool on the right data, or treated a partial truth as a finished verdict,
 or "failed closed" by writing an ABORT file and calling it done.

@@ -27,7 +27,12 @@ It's not that the agent can't write.
 
 The problem is it writes *too well*. It packages a wrong number, an outdated reference, or an unsupported claim into a confident, well-structured paragraph that looks exactly like correct output.
 
-**Falsify** (an Agent Review Kit) changes that:
+And the errors come in **two kinds**:
+
+- **Wrong number** — a specific fact is wrong (a fee, a date, a citation that doesn't hold up).
+- **Wrong conclusion** — every number is right, but the wrong tool was used, or a partial truth got shipped as a verdict.
+
+**Falsify** (an Agent Review Kit) covers both: **Layer 1 peer review** catches wrong numbers, **Layer 2 adversarial review** catches wrong conclusions. It changes that:
 
 > One agent drafts. Another agent audits. Every change goes into Git. Every disagreement goes to first-hand sources.
 
@@ -169,7 +174,9 @@ Full step-by-step: [docs/02-setup.md](./docs/02-setup.md)
 
 ---
 
-## Three rules (memorize these)
+## Layer 1 · peer review: three rules (memorize these)
+
+> Catches **wrong numbers**. Cheap, the default, for everyone.
 
 1. **Tag every paragraph**: `[AGENT-A]`, `[AGENT-B]`, or `[BOTH]`. No untagged prose.
 2. **Don't overwrite the other agent's blocks.** Add your own block underneath. Use `[AGENT-B audit]` for inline audit notes.
@@ -224,21 +231,33 @@ docs(human):      finalize report after review
 
 ---
 
-## Beyond simple peer review — when right facts produce wrong conclusions
+## Layer 2 · adversarial review: when right facts produce wrong conclusions
 
-Simple peer review catches a wrong number written prettily. The harder failure is
+> Catches **wrong conclusions**. Bring it in for high-stakes calls — it doesn't
+> replace Layer 1, it goes one level deeper.
+
+Layer 1 catches a wrong number written prettily. The harder failure is
 **right facts, wrong conclusion** — the wrong tool on the right data, a partial
 truth shipped as a verdict, or a step that "fails closed" by writing ABORT and
-calling it done.
+calling it done. Both agents would agree the number is correct, so Layer 1 can't
+catch it.
 
-The deep variant adds four things on top of the three rules:
+| | Layer 1 · peer review | Layer 2 · adversarial review |
+|---|---|---|
+| Catches | wrong facts (numbers / sources / staleness) | right facts + wrong conclusion |
+| Mechanism | three rules + tags + first-hand arbitration | verdict ladder + multi-round + G1–G4 gates |
+| Rounds | single | multi-round, fixes must survive a fresh attack |
+| Use for | fee tables, doc audits, comparisons | go/no-go calls, production changes, tech selection |
+| In one line | "is this number right?" | "what makes this conclusion hold?" |
+
+Layer 2 adds four things on top of the three rules:
 
 - **Verdict ladder**: `PROCEED` / `HOLD-N` / `ARCHIVE`, multi-round, fixes must survive a fresh attack
 - **G1–G4 precondition gates**: entity disambiguation / unit alignment / prior-conflict brake / ruler-object match
 - **Cross-model reviewer**: two different model families = enough independence, no second machine needed
 - **Verdict-as-file + step guards**: each pipeline step verified for exists / size / not-ABORT
 
-See [docs/05 — Adversarial Review](./docs/05-adversarial-review.md). For why right
+See [docs — Adversarial Review](./docs/05-adversarial-review.md). For why right
 facts still go wrong, read [examples/wrong-tool-right-data.md](./examples/wrong-tool-right-data.md);
 for the cross-model setup, [examples/cross-model-rpc.md](./examples/cross-model-rpc.md).
 
