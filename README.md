@@ -57,7 +57,7 @@ specific vertical are redacted; the point is the method, not the targets.)
 
 Result:
 
-- Total time: ~6 hours
+- Total time: under 30 minutes
 - Final report: 80+ cited source URLs
 - Agent B caught: **4 critical pricing errors**
 

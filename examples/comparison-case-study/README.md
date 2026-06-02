@@ -10,7 +10,7 @@ vertical are redacted on purpose — the point here is the *method*, not the tar
 - **Agents**: two independent agents running **different model families**.
   Different models is deliberate: it keeps the reviewer from sharing the
   drafter's blind spots.
-- **Duration**: approximately 6 hours
+- **Duration**: under 30 minutes
 - **Output**: main report + a graded source list with 80+ URLs (A/B/C/D tiers),
   plus a machine-readable fact sheet
 - **Result**: the auditing agent caught 4 critical pricing errors before shipping
