@@ -103,6 +103,10 @@ flowchart LR
 
 ## 5-minute quickstart
 
+> ⚡ Fastest path: fork [`demo-vault/`](./demo-vault/) — a pre-wired empty
+> workspace where you only edit `research/00-brief.md` to start. Below is the
+> build-from-scratch version.
+
 ```bash
 # 1. Create a private GitHub repo (call it whatever)
 
@@ -203,8 +207,10 @@ docs(human):      finalize report after review
 │       ├── agent-b.md           Agent B full prompt
 │       └── human.md             Human Operator prompt
 ├── examples/
-│   └── comparison-case-study/
-│       └── README.md            Sanitized horizontal-comparison case study
+│   └── comparison-case-study/   Sanitized end-to-end sample (draft→audit→resolve→ship)
+├── demo-vault/                  Forkable empty workspace (edit 00-brief and go)
+├── assets/
+│   └── flow-card.png            Shareable flow diagram
 └── LICENSE                      MIT
 ```
 
@@ -223,7 +229,7 @@ It's a **protocol**: author tagging, conflict handling, and audit trail requirem
 
 ## Roadmap
 
-- [ ] Forkable demo vault
+- [x] Forkable demo vault (see [`demo-vault/`](./demo-vault/))
 - [ ] Full case study: ~12-venue horizontal research postmortem (sanitized)
 - [ ] Real conflict samples: A drafts wrong, B catches it, docs arbitrate
 - [ ] Claude Code usage example

@@ -177,6 +177,8 @@ flowchart TD
 
 ## 5 分钟速通
 
+> ⚡ 最快路径：直接 fork [`demo-vault/`](./demo-vault/)——一个已经接好协议的空壳工作区，只需改 `research/00-brief.md` 就能开跑。下面是从零手搭的版本。
+
 ```bash
 # 1. 建一个私有 GitHub repo（名字随意）
 
@@ -351,8 +353,10 @@ docs(human):      finalize report after review
 │       ├── agent-b.md           Agent B 完整 prompt
 │       └── human.md             Human Operator prompt
 ├── examples/
-│   └── comparison-case-study/
-│       └── README.md            脱敏案例：横向竞品研究复盘
+│   └── comparison-case-study/   脱敏端到端样例（draft→audit→冲突→仲裁→上线）
+├── demo-vault/                  可直接 fork 的空壳工作区（改 00-brief 就能跑）
+├── assets/
+│   └── flow-card.png            可截图传播的流程图
 └── LICENSE                      MIT
 ```
 
@@ -360,7 +364,7 @@ docs(human):      finalize report after review
 
 ## Roadmap
 
-- [ ] 增加可直接 fork 的 demo vault
+- [x] 增加可直接 fork 的 demo vault（见 [`demo-vault/`](./demo-vault/)）
 - [ ] 增加完整 case study：约 12 家竞品横向研究复盘（脱敏版）
 - [ ] 增加真实冲突样例：A 写错、B 审出、官方 docs 仲裁
 - [ ] 增加 Claude Code 使用示例
