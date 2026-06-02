@@ -1,7 +1,7 @@
 # Falsify
 
-> **Your unfair advantage.** Drop in one prompt; two top AIs cross-examine it; you keep only the conclusion that survives.
-> You move once, they fight it out. Spends tokens, saves your brain.
+> **Your unfair advantage: two top AIs from different vendors cross-examine your work — you keep only what survives.**
+> Ask once, they fight it out. Spends tokens, saves your brain — and it's the one thing a single vendor's `--verify` flag can't copy: OpenAI won't let you use Claude as the reviewer. Cross-vendor review is yours alone.
 
 [![falsify](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -87,6 +87,7 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 - [`templates/`](./templates/) — ready to use: `AGENTS.md`, three prompts, kickoff/retro, conflict/resolution logs, CI template
 - [`demo-vault/`](./demo-vault/) — forkable empty workspace; edit `00-brief.md` and go
 - [`examples/comparison-case-study/`](./examples/comparison-case-study/) — sanitized end-to-end sample + one real run
+- [`examples/cases/`](./examples/cases/) — cross-industry case library (tech selection / market research / …), each proving "without Falsify, this error ships"
 - [`docs/`](./docs/) — [architecture](./docs/01-architecture.md) · [setup](./docs/02-setup.md) · [Layer 1](./docs/03-collaboration.md) · [Layer 2](./docs/05-adversarial-review.md) · [troubleshooting](./docs/04-troubleshooting.md)
 
 ---
@@ -94,10 +95,14 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 ## Roadmap
 
 - [x] CLI engine `falsify` (lint / review / verdict gate)
-- [x] Forkable demo vault · sanitized case · flow card · real-run GIF
 - [x] One-click: provider presets (`-p deepseek`) / `.falsify` config / paste-and-go
-- [x] GitHub Action: block a PR that doesn't pass the verdict ([`templates/github-action-falsify.yml`](./templates/github-action-falsify.yml))
-- [ ] More scenario templates: research / competitor / tech selection / code audit
+- [x] Web paste-and-go POC ([`web/`](./web/))
+- [x] GitHub Action: block a PR that doesn't pass the verdict ([template](./templates/github-action-falsify.yml))
+- [x] Forkable demo vault · sanitized case · flow card · real-run GIF
+- [x] Cross-industry case library, started ([`examples/cases/`](./examples/cases/)): tech selection / market research
+- [ ] Hosted web: 3 free runs, no key (paste-and-go, zero install)
+- [ ] Chrome extension: one-click Falsify on ChatGPT / Claude / Gemini
+- [ ] More industry cases: legal / medical / product / academic
 
 ## Contributing
 

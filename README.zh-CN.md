@@ -1,7 +1,7 @@
 # Falsify · 证伪
 
-> **你的 unfair advantage。** 一句话丢进去，两个顶尖 AI 互相拷问，你只拿活下来的那个结论。
-> 你动一次手，它们替你死磕到底。费 token，省脑子。
+> **你的 unfair advantage:让两个不同厂商的顶尖 AI 互相拷问，你只拿活下来的结论。**
+> 一次提问，它们替你死磕。费 token，省脑子——而且这是单厂商一个 `--verify` 复制不了的:OpenAI 不会让你用 Claude 当审稿人,跨厂商互查只有你能做。
 
 [![falsify](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml/badge.svg)](https://github.com/shi275773124/obsidian-dual-agent/actions/workflows/falsify.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -89,6 +89,7 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 - [`templates/`](./templates/) —— 即拿即用:`AGENTS.md`、三个 prompt、kickoff/retro、conflict/resolution log、CI 模板
 - [`demo-vault/`](./demo-vault/) —— 可直接 fork 的空壳工作区,改 `00-brief.md` 就能跑
 - [`examples/comparison-case-study/`](./examples/comparison-case-study/) —— 脱敏端到端样例(draft→audit→冲突→仲裁→上线 + 一次真实运行)
+- [`examples/cases/`](./examples/cases/) —— 跨行业案例库(技术选型 / 市场调研…),每个证明"没 Falsify 这个错会 ship"
 - [`docs/`](./docs/) —— [架构](./docs/01-architecture.zh-CN.md) · [部署](./docs/02-setup.zh-CN.md) · [协作](./docs/03-collaboration.zh-CN.md) · [对抗审议](./docs/05-adversarial-review.zh-CN.md) · [故障排查](./docs/04-troubleshooting.zh-CN.md)
 
 ---
@@ -96,10 +97,14 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 ## Roadmap
 
 - [x] CLI 引擎 `falsify`(lint / review / verdict 闸门)
-- [x] 可 fork 的 demo vault · 脱敏案例 · 流程图 · 真实运行 GIF
 - [x] 一键化:provider 预设(`-p deepseek`)/ `.falsify` 配置 / 粘贴即跑
-- [x] GitHub Action:PR 没过 verdict 就 block(模板 [`templates/github-action-falsify.yml`](./templates/github-action-falsify.yml))
-- [ ] 更多场景模板:投研 / 竞品 / 技术选型 / 代码审计
+- [x] Web 粘贴即审 POC（[`web/`](./web/)）
+- [x] GitHub Action:PR 没过 verdict 就 block([模板](./templates/github-action-falsify.yml))
+- [x] 可 fork 的 demo vault · 脱敏案例 · 流程图 · 真实运行 GIF
+- [x] 跨行业案例库起步（[`examples/cases/`](./examples/cases/)):技术选型 / 市场调研
+- [ ] 托管 web:免 key 试 3 次(粘贴即审、零安装)
+- [ ] Chrome 插件:在 ChatGPT / Claude / Gemini 页面一键 Falsify
+- [ ] 补更多行业案例:法律 / 医疗 / 产品 / 学术
 
 ## Contributing
 
