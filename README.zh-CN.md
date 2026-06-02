@@ -86,6 +86,7 @@
 - 对 AI 输出的可靠性有要求但又不想逐字 fact-check 的人
 - 想把 AI 协作工作流工程化、可审计、可回溯的团队
 - 跑 Claude Code / Cursor / OpenCode / 自研 agent 的开发者
+- **刚上手 AI 的小白**：不懂代码也能用——fork [`demo-vault/`](./demo-vault/)，照着 `00-brief.md` 填空，把任务丢给两个 AI，剩下的让它们互相挑错
 
 ---
 
