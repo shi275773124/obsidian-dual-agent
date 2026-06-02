@@ -83,6 +83,7 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 
 ## What else is in here
 
+- [`web/`](./web/) — browser paste-and-go POC: one box, one button → Verdict + top risks (`python web/serve.py`)
 - [`templates/`](./templates/) — ready to use: `AGENTS.md`, three prompts, kickoff/retro, conflict/resolution logs, CI template
 - [`demo-vault/`](./demo-vault/) — forkable empty workspace; edit `00-brief.md` and go
 - [`examples/comparison-case-study/`](./examples/comparison-case-study/) — sanitized end-to-end sample + one real run

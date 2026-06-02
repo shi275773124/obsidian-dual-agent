@@ -102,6 +102,10 @@ EXIT = {"PROCEED": 0, "HOLD": 1, "ARCHIVE": 2}
 MAX_TOKENS = 2048
 
 
+class FalsifyError(Exception):
+    """Recoverable error — CLI turns it into an exit; the web server catches it."""
+
+
 def die(msg, code=3):
     print(f"falsify: {msg}", file=sys.stderr)
     sys.exit(code)
@@ -135,16 +139,17 @@ def setting(name, default=None):
     return os.environ.get(name) or CFG.get(name) or default
 
 
-def resolve(args):
-    """Resolve base / key / model from flags > env > .falsify > provider preset."""
-    provider = (getattr(args, "provider", None) or setting("FALSIFY_PROVIDER") or "").lower()
-    base = getattr(args, "base", None) or setting("FALSIFY_API_BASE")
-    model = getattr(args, "model", None) or setting("FALSIFY_MODEL")
+def resolve_endpoint(provider=None, model=None, base=None):
+    """Resolve base / key / model from args > env > .falsify > provider preset.
+    Reusable by both the CLI and the web server."""
+    provider = (provider or setting("FALSIFY_PROVIDER") or "").lower()
+    base = base or setting("FALSIFY_API_BASE")
+    model = model or setting("FALSIFY_MODEL")
     key = setting("FALSIFY_API_KEY")
 
     if provider:
         if provider not in PRESETS:
-            die(f"unknown --provider '{provider}'. Known: {', '.join(PRESETS)}")
+            raise FalsifyError(f"unknown provider '{provider}'. Known: {', '.join(PRESETS)}")
         pbase, pmodel, pkey_env = PRESETS[provider]
         base = base or pbase
         model = model or pmodel
@@ -160,6 +165,12 @@ def resolve(args):
     return base, key, model
 
 
+def resolve(args):
+    return resolve_endpoint(getattr(args, "provider", None),
+                            getattr(args, "model", None),
+                            getattr(args, "base", None))
+
+
 # ----------------------------------------------------------------- I/O + API
 
 def read_input(path):
@@ -173,11 +184,11 @@ def read_input(path):
 
 def chat(system, user, base, key, model):
     if not base:
-        die("no endpoint. Set --provider <name>, or FALSIFY_API_BASE, or run `falsify init`.")
+        raise FalsifyError("no endpoint. Set --provider <name>, or FALSIFY_API_BASE, or run `falsify init`.")
     if not key:
-        die("no API key. Set FALSIFY_API_KEY (or a provider key like DEEPSEEK_API_KEY).")
+        raise FalsifyError("no API key. Set FALSIFY_API_KEY (or a provider key like DEEPSEEK_API_KEY).")
     if not model:
-        die("no model. Set --model, FALSIFY_MODEL, or use a --provider with a default.")
+        raise FalsifyError("no model. Set --model, FALSIFY_MODEL, or use a --provider with a default.")
 
     payload = json.dumps({
         "model": model,
@@ -194,13 +205,13 @@ def chat(system, user, base, key, model):
         with urllib.request.urlopen(req, timeout=180) as resp:
             data = json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
-        die(f"API error {e.code}: {e.read().decode('utf-8', 'replace')[:300]}")
+        raise FalsifyError(f"API error {e.code}: {e.read().decode('utf-8', 'replace')[:300]}")
     except urllib.error.URLError as e:
-        die(f"network error: {e.reason}")
+        raise FalsifyError(f"network error: {e.reason}")
     try:
         return data["choices"][0]["message"]["content"]
     except (KeyError, IndexError):
-        die(f"unexpected API response: {json.dumps(data)[:300]}")
+        raise FalsifyError(f"unexpected API response: {json.dumps(data)[:300]}")
 
 
 def parse_verdict(text):
@@ -367,7 +378,10 @@ def main():
     pi.set_defaults(func=cmd_init)
 
     args = p.parse_args()
-    args.func(args)
+    try:
+        args.func(args)
+    except FalsifyError as e:
+        die(str(e))
 
 
 if __name__ == "__main__":

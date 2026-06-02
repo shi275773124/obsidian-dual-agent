@@ -85,6 +85,7 @@ falsify lint examples/comparison-case-study/05-final-excerpt.md   # → SHIPPABL
 
 ## 仓库里还有什么
 
+- [`web/`](./web/) —— 浏览器粘贴即审 POC:一个框一个按钮 → Verdict + top 风险(`python web/serve.py`)
 - [`templates/`](./templates/) —— 即拿即用:`AGENTS.md`、三个 prompt、kickoff/retro、conflict/resolution log、CI 模板
 - [`demo-vault/`](./demo-vault/) —— 可直接 fork 的空壳工作区,改 `00-brief.md` 就能跑
 - [`examples/comparison-case-study/`](./examples/comparison-case-study/) —— 脱敏端到端样例(draft→audit→冲突→仲裁→上线 + 一次真实运行)
