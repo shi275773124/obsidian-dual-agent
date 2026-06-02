@@ -43,10 +43,20 @@ agent synthesizing "what the fee probably is" is how all four of these slipped i
 > The goal wasn't a perfect first draft. It was making four wrong numbers
 > *impossible to ship quietly*.
 
-## Coming soon
+## Walk the trail (sanitized samples)
 
-- [ ] conflict log sample (real `[CONFLICT]` → `[RESOLUTION]` example)
-- [ ] resolution log sample (evidence + arbitration note)
-- [ ] source verification sample (how first-hand sources were cited)
-- [ ] final report excerpt (anonymized, with author tags)
-- [ ] git diff walkthrough (what the audit trail looks like)
+Read these in order to see errors caught from draft to shipped, end to end:
+
+1. [`01-agent-a-draft-excerpt.md`](./01-agent-a-draft-excerpt.md) — Agent A drafts the table, seeds the errors, flags its own uncertainty
+2. [`02-agent-b-audit-excerpt.md`](./02-agent-b-audit-excerpt.md) — Agent B audits, catches 4 issues, each with a verification path
+3. [`03-conflict-log.md`](./03-conflict-log.md) — the two table-level disagreements, written up not overwritten
+4. [`04-resolution-log.md`](./04-resolution-log.md) — each conflict closed against a first-hand source
+5. [`05-final-excerpt.md`](./05-final-excerpt.md) — the shipped table, every cell cited, plus the git trail
+
+> All venue names are redacted (Venue A–D) and all numbers are illustrative
+> placeholders. The sequence is real; the values are not.
+
+## Still to come
+
+- [ ] full (longer) draft and audit passes, not just excerpts
+- [ ] a real `git log --follow` walkthrough on the table
