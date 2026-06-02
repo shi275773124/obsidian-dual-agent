@@ -10,3 +10,9 @@ Thumbs.db
 # Build artifacts
 node_modules/
 *.log
+
+# transient demo artifacts
+demo-output.txt
+assets/_preview_*.png
+__pycache__/
+*.pyc

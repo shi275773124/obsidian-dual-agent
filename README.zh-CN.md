@@ -106,7 +106,13 @@
 
 ## ⚙️ 引擎：`falsify` CLI
 
-协议再好，靠自律执行迟早会废。`falsify` 把它压成一条命令——零依赖、Python 3.8+、任意 OpenAI 兼容端点（OpenAI / OpenRouter / 本地代理都行）。
+协议再好，靠自律执行迟早会废。`falsify` 把它压成一条命令——零依赖、Python 3.8+、任意 OpenAI 兼容端点（OpenAI / OpenRouter / DeepSeek / 本地代理都行）。
+
+<p align="center">
+  <img src="./assets/demo.gif" alt="falsify review 实跑：Skeptic 抓出 4+ 处问题 → Verdict: HOLD，exit 1" width="760">
+</p>
+
+> 上面是**真实运行**：DeepSeek 当 Skeptic 审计脱敏样例，把埋的错一个个抓出来，吐出 `Verdict: HOLD`、退出码 1。完整逐字记录见 [examples/.../06-real-review-deepseek.md](./examples/comparison-case-study/06-real-review-deepseek.md)。
 
 ```bash
 pip install -e .          # 或直接用 python falsify.py

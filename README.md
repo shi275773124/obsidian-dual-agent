@@ -90,7 +90,15 @@ Result:
 
 A protocol enforced by discipline rots. `falsify` compresses it into one command —
 zero dependencies, Python 3.8+, any OpenAI-compatible endpoint (OpenAI, OpenRouter,
-a local proxy).
+DeepSeek, a local proxy).
+
+<p align="center">
+  <img src="./assets/demo.gif" alt="falsify review run: the Skeptic catches 4+ issues, returns Verdict: HOLD, exit 1" width="760">
+</p>
+
+> That's a **real run**: a DeepSeek model as the Skeptic audits a sanitized draft,
+> catches every seeded error, and returns `Verdict: HOLD` (exit 1). Full verbatim
+> transcript: [examples/.../06-real-review-deepseek.md](./examples/comparison-case-study/06-real-review-deepseek.md).
 
 ```bash
 pip install -e .          # or just run python falsify.py
