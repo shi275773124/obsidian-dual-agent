@@ -8,6 +8,10 @@
 
 [English](./README.md) · [架构](./docs/01-architecture.zh-CN.md) · [部署](./docs/02-setup.zh-CN.md) · [协作规范](./docs/03-collaboration.zh-CN.md) · [故障排查](./docs/04-troubleshooting.zh-CN.md)
 
+<p align="center">
+  <img src="./assets/flow-card.png" alt="Agent Review Kit：Agent A 起稿 → Agent B 审计 → 分歧 → 一手资料仲裁 → Git 留证据链 → Ship" width="840">
+</p>
+
 > 🙏 致谢 **Hermes Agent**、**Claude Code**、**Codex**——这套双 Agent 工作流就是在它们上面跑通并打磨出来的。（Hermes 主要是个人偏好。）
 
 ---

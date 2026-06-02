@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- Source for assets/flow-card.png. Regenerate with headless Chrome:
+     chrome --headless=new --force-device-scale-factor=2 --window-size=1200,675 \
+       --screenshot=flow-card.png file://.../flow-card.html -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px; height: 675px; overflow: hidden;
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: #e6edf3;
+    background:
+      radial-gradient(1100px 500px at 18% -10%, #1b2747 0%, rgba(27,39,71,0) 60%),
+      radial-gradient(900px 600px at 110% 120%, #21184a 0%, rgba(33,24,74,0) 55%),
+      #0b1020;
+  }
+  .wrap { width: 100%; height: 100%; padding: 46px 50px; display: flex; flex-direction: column; }
+  h1 { font-size: 44px; letter-spacing: .5px; }
+  h1 .badge { color: #7c8cff; }
+  .sub { color: #8b96a8; font-size: 20px; margin-top: 10px; }
+  .flow { display: flex; align-items: center; justify-content: space-between; margin: auto 0; }
+  .card {
+    width: 176px; height: 156px; border-radius: 16px;
+    background: linear-gradient(180deg, #141d33 0%, #0f1729 100%);
+    border: 1px solid #28324e; border-top: 4px solid var(--a);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 12px;
+  }
+  .card .e { font-size: 36px; line-height: 1; }
+  .card .t { font-size: 23px; font-weight: 700; margin-top: 12px; color: #fff; }
+  .card .s { font-size: 15px; color: #93a0b4; margin-top: 6px; }
+  .arrow { color: #44507a; font-size: 30px; font-weight: 700; }
+  .tagline { text-align: center; font-size: 36px; font-weight: 800; margin-top: 6px; }
+  .tagline em { font-style: normal; color: #f5b301; }
+  footer { display: flex; justify-content: space-between; align-items: center;
+           margin-top: auto; color: #6b7488; font-size: 16px; }
+  footer .pill { color: #9aa6bd; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Agent Review <span class="badge">Kit</span></h1>
+      <div class="sub">给 AI Agent 加一层「代码审查」：一个写，一个审，Git 留证据链</div>
+    </header>
+
+    <div class="flow">
+      <div class="card" style="--a:#3b82f6"><div class="e">✍️</div><div class="t">Agent A</div><div class="s">起稿 · 推进</div></div>
+      <div class="arrow">➜</div>
+      <div class="card" style="--a:#f59e0b"><div class="e">🔍</div><div class="t">Agent B</div><div class="s">审计 · 找错</div></div>
+      <div class="arrow">➜</div>
+      <div class="card" style="--a:#ef4444"><div class="e">⚠️</div><div class="t">分歧</div><div class="s">变成显式冲突</div></div>
+      <div class="arrow">➜</div>
+      <div class="card" style="--a:#10b981"><div class="e">📚</div><div class="t">一手资料</div><div class="s">仲裁谁对</div></div>
+      <div class="arrow">➜</div>
+      <div class="card" style="--a:#8b5cf6"><div class="e">✅</div><div class="t">Ship</div><div class="s">Git 留证据链</div></div>
+    </div>
+
+    <div class="tagline">不怕 AI 犯错，怕的是它<em>错得太像真的</em></div>
+
+    <footer>
+      <span class="pill">把 AI 幻觉从“隐藏错误”变成“可审计分歧”</span>
+      <span>github.com/shi275773124/obsidian-dual-agent</span>
+    </footer>
+  </div>
+</body>
+</html>

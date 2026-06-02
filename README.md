@@ -8,6 +8,10 @@
 
 [中文版](./README.zh-CN.md) · [Architecture](./docs/01-architecture.md) · [Setup](./docs/02-setup.md) · [Collaboration Rules](./docs/03-collaboration.md) · [Troubleshooting](./docs/04-troubleshooting.md)
 
+<p align="center">
+  <img src="./assets/flow-card.png" alt="Agent Review Kit: Agent A drafts → Agent B audits → conflict → first-hand sources arbitrate → Git evidence trail → ship" width="840">
+</p>
+
 > 🙏 Thanks to **Hermes Agent**, **Claude Code**, and **Codex** — the agent tooling this dual-agent workflow was built and tested on.
 
 ---
