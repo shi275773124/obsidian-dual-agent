@@ -1,0 +1,10 @@
+# Normalize line endings so the repo is LF on every OS — stops phantom
+# CRLF/LF "modified" diffs on Windows checkouts.
+* text=auto eol=lf
+
+# Shell scripts must stay LF (they're executable).
+*.sh text eol=lf
+
+# Binary assets — never convert.
+*.png binary
+*.gif binary
