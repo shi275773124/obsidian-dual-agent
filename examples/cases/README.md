@@ -13,6 +13,17 @@ falsify review examples/cases/market-research-sample.md -p deepseek
 |---|---|---|
 | [tech-selection-sample.md](./tech-selection-sample.md) | Engineering / architecture | unsupported benchmark · logic jump · missing source · scope overreach |
 | [market-research-sample.md](./market-research-sample.md) | Market / competitor research | numbers that don't add up · stale stat as current · apples-to-oranges · unsupported conclusion |
+| [reversal-sample.md](./reversal-sample.md) | Any (anti-laziness) | sycophantic reversal — an estimate cut ~10x with no new evidence |
+
+The reversal sample needs the version-aware check (it compares against git history):
+
+```bash
+falsify review examples/cases/reversal-sample.md --against HEAD~1 -p deepseek
+```
+
+`--against <ref>` catches what a single review can't: a number/recommendation that
+flipped because someone pushed back ("too long", "you're wrong"), not because the
+data changed. That's the AI-laziness / sycophancy failure mode, made visible.
 
 > Errors are **intentionally planted** and the content is illustrative. The point is
 > the same across every domain: *without a second reviewer, these ship.*

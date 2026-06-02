@@ -31,6 +31,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -42,7 +43,7 @@ for _s in (sys.stdout, sys.stderr):
     except (AttributeError, ValueError):
         pass
 
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 
 # provider -> (base_url, default_model, key_env). model None = user must set one.
 PRESETS = {
@@ -88,6 +89,18 @@ or
 VERDICT: HOLD       (fixable issues found — list them above)
 or
 VERDICT: ARCHIVE    (structurally broken, no fix revives it)
+"""
+
+REVERSAL_ADDENDUM = """
+
+--- REVERSAL CHECK (a PREVIOUS version is also provided) ---
+Besides the normal audit, compare the two versions. Flag every number, claim,
+recommendation, or verdict that changed MATERIALLY without a stated reason or new
+evidence in the current version. A change driven by social/operator pressure
+("too long", "make it cheaper", "you're wrong") rather than by data is a
+SYCOPHANTIC REVERSAL — call it out. A large unexplained swing (e.g. an estimate
+dropping ~10x, or a recommendation flipping) is a red flag, not a correction.
+Tag these findings [AGENT-B reversal] and let them weigh on the verdict.
 """
 
 AUTHOR_SYSTEM = """You are Agent A, the drafter. Produce a clear, auditable first draft
@@ -284,14 +297,33 @@ def cmd_lint(args):
     sys.exit(0 if ok else 1)
 
 
+def git_show(ref, path):
+    """Fetch a file's content at an earlier git ref (for --against)."""
+    for spec in (f"{ref}:{path}", f"{ref}:./{path}"):
+        r = subprocess.run(["git", "show", spec], capture_output=True)
+        if r.returncode == 0:
+            return r.stdout.decode("utf-8", "replace")
+    err = r.stderr.decode("utf-8", "replace").strip()
+    raise FalsifyError(f"can't read {path} at {ref}: {err or 'not found'}")
+
+
 def cmd_review(args):
     base, key, model = resolve(args)
-    draft = read_input(args.file)
-    user = f"Audit this draft. Find what would ship wrong.\n\n{draft}"
+    cur = read_input(args.file)
+    if getattr(args, "against", None):
+        old = git_show(args.against, args.file)
+        system = SKEPTIC_SYSTEM + REVERSAL_ADDENDUM
+        user = (f"=== PREVIOUS VERSION ({args.against}) ===\n{old}\n\n"
+                f"=== CURRENT VERSION ===\n{cur}\n\n"
+                "Audit the CURRENT version for what would ship wrong, AND run the "
+                "reversal check against the PREVIOUS version.")
+    else:
+        system = SKEPTIC_SYSTEM
+        user = f"Audit this draft. Find what would ship wrong.\n\n{cur}"
     if args.dry_run:
-        print(f"[dry-run] base={base} model={model}\n\n{SKEPTIC_SYSTEM}")
+        print(f"[dry-run] base={base} model={model} against={getattr(args, 'against', None)}")
         return
-    out = chat(SKEPTIC_SYSTEM, user, base, key, model)
+    out = chat(system, user, base, key, model)
     if args.out:
         Path(args.out).write_text(out, encoding="utf-8")
         print(f"[audit written to {args.out}]", file=sys.stderr)
@@ -357,6 +389,8 @@ def main():
     pr = sub.add_parser("review", help="skeptic reviewer attacks a draft -> Verdict")
     pr.add_argument("file", help="file path, or - for stdin")
     pr.add_argument("-o", "--out", help="write the audit to a file")
+    pr.add_argument("--against", metavar="GIT_REF",
+                    help="also flag unexplained reversals vs this earlier version (e.g. HEAD~1)")
     pr.add_argument("--dry-run", action="store_true")
     add_api_flags(pr)
     pr.set_defaults(func=cmd_review)
