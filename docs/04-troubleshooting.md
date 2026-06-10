@@ -123,7 +123,7 @@ ssh -T git@github.com   # should print "Hi <you>"
 
 Falsify is a fail-closed reviewer gate, not a proof system. Treat these as known boundaries:
 
-- **Draft prompt injection**: the CLI wraps drafts in explicit `<<<FALSIFY_DRAFT ...>>>` delimiters and tells the reviewer to treat instructions or `VERDICT:` lines inside the draft as evidence, not commands. The CLI also parses the **last** reviewer `VERDICT:` line. This blocks the cheap bypass where a reviewed document contains `VERDICT: PROCEED` near the top.
+- **Draft prompt injection**: the CLI wraps drafts in `<<<FALSIFY_DRAFT_<random> ...>>>` delimiters — the tag carries a per-run random suffix, so a draft cannot forge the closing fence — and tells the reviewer to treat instructions or `VERDICT:` lines inside the draft as evidence, not commands. The CLI also parses the **last** reviewer `VERDICT:` line. This blocks the cheap bypasses (a planted `VERDICT: PROCEED`, a planted `<<<END ...>>>`); a reviewer model that *follows* injected instructions anyway is the next bullet.
 - **Reviewer compromise or collusion**: if the reviewer model ignores the system prompt, is the same model/provider as the drafter, or is asked to rubber-stamp, independence is gone. Use a genuinely different reviewer for high-stakes work.
 - **Truncated reviewer output**: if the model response is cut before the final verdict line, the CLI defaults to `HOLD`. That is safe but can be noisy; raise the output budget or shorten the draft.
 - **`lint` is a collaboration convention check**: it catches untagged prose and open blockers. It is not anti-fraud; Markdown formatting tricks can hide prose from the tag heuristic.

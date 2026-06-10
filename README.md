@@ -84,7 +84,7 @@ falsify review report.md -p deepseek   # a second model audits it -> Verdict (PR
 falsify run brief.md --drafter claude --reviewer deepseek   # draft with one model, audit with another
 ```
 
-`run` is the full loop. Use `--drafter/--reviewer` (plus optional `--drafter-model/--reviewer-model`) to preserve the core Falsify rule: author and reviewer should be independent. If both roles resolve to the same provider/model/base, the CLI warns that independence is weakened.
+`run` is the full loop. Use `--drafter/--reviewer` (plus optional `--drafter-model/--reviewer-model`) to preserve the core Falsify rule: author and reviewer should be independent. If both roles resolve to the same effective endpoint + model (or the same agent CLI command), the CLI warns that independence is weakened.
 
 `-p` is a provider preset (deepseek / openai / openrouter / moonshot / siliconflow / local) that fills in the endpoint and model — **you only supply the key**. Tired of typing it? `falsify init` saves it once, then just `falsify review report.md`; or `cat report.md | falsify review -` to paste-and-go.
 
